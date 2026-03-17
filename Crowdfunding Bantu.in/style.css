@@ -1,14 +1,62 @@
-header {
-    background-color: #B5C99A;
-    color: #780C28;
-    padding: 20px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FDF0F0;
 }
 
-header h1 {
+/*HEADER PART*/
+.header {
+    background-color: #132043;
+    padding: 20px 10px;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+}
+
+.header a {
+    float: left;
+    color: #FDF0F0;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+}
+
+.header a.logo {
     font-size: 25px;
+    font-weight: bold;
+}
+
+.navbar-right a:hover {
+  background-color: #FDF0F0;
+  color: #132043;
+}
+
+.navbar-right a.active {
+  background-color: #F1B4BB;
+  color: #1F4172;
+}
+
+.navbar-right {
+  float: right;
+}
+
+/*CONTENT PART*/
+
+
+/*FOOTER PART*/
+.footer {
+    background-color: #132043;
+    padding: 1px 1px;
+    overflow: hidden;
+}
+
+.footer p{
+    color: #FDF0F0;
+    float: center;
+    text-align: center;
 }
 
 .login {
