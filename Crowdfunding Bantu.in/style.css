@@ -44,7 +44,9 @@ body {
 }
 
 /*CONTENT PART*/
-
+.container {
+    padding: 30px 5%;
+}
 
 /*FOOTER PART*/
 .footer {
