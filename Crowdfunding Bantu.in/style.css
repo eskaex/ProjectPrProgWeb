@@ -874,3 +874,151 @@ button#login:active {
 }
 
 /* UDAH BUKAN BAGIAN HOME PAGE LAGI BYE */
+
+/* BAGIAN DONASI.HATEMEL */
+
+/* ================================================
+   VERSI SIMPEL - HALAMAN DONASI
+   ================================================ */
+
+/* Hero Section */
+.don-hero {
+    background: #1F4172;
+    color: #ffffff;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.don-hero-judul {
+    font-size: 28px;
+    margin-top: 10px;
+}
+
+/* Layout Grid */
+.don-tata-letak {
+    max-width: 1000px;
+    margin: -30px auto 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+/* Kartu Kiri & Panel Kanan */
+.don-kartu, .don-panel {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 320px;
+    padding: 20px;
+}
+
+.don-kartu-gambar {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Input & Form */
+.don-kelompok {
+    margin-bottom: 15px;
+}
+
+.don-masukan {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #c8d0dc;
+    border-radius: 6px;
+    background: #FDF0F0;
+    box-sizing: border-box;
+}
+
+/* Tombol Nominal */
+.don-grid-nominal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.don-tombol-nominal {
+    padding: 8px;
+    border: 1px solid #1F4172;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.don-tombol-nominal:hover {
+    background: #1F4172;
+    color: #fff;
+}
+
+/* Metode Bayar */
+.don-grid-bayar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.don-pilihan-bayar {
+    padding: 10px;
+    border: 1px solid #c8d0dc;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.don-pilihan-bayar.terpilih {
+    background: #F1B4BB;
+    border-color: #132043;
+}
+
+/* Progress Bar */
+.don-progres {
+    background: #eee;
+    height: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.don-progres-isi {
+    background: #1F4172;
+    height: 100%;
+    border-radius: 5px;
+}
+
+/* Tombol Utama */
+.don-tombol-kirim {
+    width: 100%;
+    padding: 15px;
+    background: #132043;
+    color: #FDF0F0;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.don-tombol-kirim:hover {
+    background: #1F4172;
+}
+
+/* Ringkasan */
+.don-baris-ringkasan {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.don-total {
+    font-weight: bold;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-top: 10px;
+}
