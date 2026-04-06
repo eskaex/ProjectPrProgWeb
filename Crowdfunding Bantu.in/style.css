@@ -196,3 +196,542 @@ Pink Krem (?) #FDF0F0*/
 button {
     background-color: greenyellow;
 }
+
+/* INI BAGIAN HOME PAGEE YH */
+/* ================================================
+   Color Pallete nyah:
+   - Dark Deep  : #132043
+   - Dark Blue  : #1F4172
+   - Peach      : #F1B4BB
+   - Cream Pink : #FDF0F0
+================================================ */
+
+/* ── RESET DASAR ── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FDF0F0;
+    color: #132043;
+    font-size: 15px;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+/* ── CONTAINER ── */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ================================================
+   HEADER
+================================================ */
+.header {
+    background-color: #132043;
+    padding: 14px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.logo-icon {
+    color: #F1B4BB;
+    font-size: 22px;
+}
+
+.logo-text {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.logo-footer .logo-text {
+    color: #FDF0F0;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.aktif {
+    color: #F1B4BB;
+    border-bottom: 2px solid #F1B4BB;
+}
+
+.btn-login {
+    background-color: #F1B4BB;
+    color: #132043;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 7px 20px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.btn-login:hover {
+    background-color: #e89aa3;
+}
+
+/* ================================================
+   HERO SECTION
+================================================ */
+.hero {
+    background-color: #1F4172;
+    color: #ffffff;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 32px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+}
+
+.hero p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 580px;
+    margin: 0 auto 28px auto;
+    line-height: 1.7;
+}
+
+.btn-utama {
+    display: inline-block;
+    background-color: #F1B4BB;
+    color: #132043;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 12px 32px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.btn-utama:hover {
+    background-color: #e89aa3;
+}
+
+/* ================================================
+   SECTION PENCARIAN / FILTER
+================================================ */
+.section-pencarian {
+    background-color: #ffffff;
+    padding: 40px 0;
+    border-bottom: 3px solid #F1B4BB;
+}
+
+.section-pencarian h2 {
+    font-size: 22px;
+    color: #132043;
+    margin-bottom: 6px;
+}
+
+.sub-judul {
+    color: #555555;
+    font-size: 14px;
+    margin-bottom: 22px;
+}
+
+.form-pencarian {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 180px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #132043;
+}
+
+.form-group input,
+.form-group select {
+    padding: 9px 12px;
+    border: 1.5px solid #c8d0dc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #FDF0F0;
+    color: #132043;
+    font-family: Arial, sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #1F4172;
+    background-color: #ffffff;
+}
+
+.form-group input::placeholder {
+    color: #aaaaaa;
+}
+
+.tombol-wrap {
+    flex: 0;
+    min-width: auto;
+}
+
+.btn-cari {
+    background-color: #1F4172;
+    color: #ffffff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+.btn-cari:hover {
+    background-color: #132043;
+}
+
+/* ================================================
+   SECTION DAFTAR KAMPANYE
+================================================ */
+.section-kampanye {
+    padding: 48px 0;
+    flex: 1;
+}
+
+.section-kampanye h2 {
+    font-size: 22px;
+    color: #132043;
+    margin-bottom: 6px;
+}
+
+/* Grid 3 kolom */
+.grid-kampanye {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+}
+
+/* ── Card Kampanye ── */
+.card-kampanye {
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(19, 32, 67, 0.1);
+    border: 1px solid #e0e8f0;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.25s, transform 0.25s;
+}
+
+.card-kampanye:hover {
+    box-shadow: 0 6px 20px rgba(19, 32, 67, 0.18);
+    transform: translateY(-4px);
+}
+
+/* Poster */
+.card-poster {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    background-color: #c8d6e8;
+}
+
+/* Isi card */
+.card-isi {
+    padding: 16px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Badge Kategori */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    width: fit-content;
+}
+
+.badge-bencana {
+    background-color: #F1B4BB;
+    color: #7a1a28;
+}
+
+.badge-pendidikan {
+    background-color: #1F4172;
+    color: #ffffff;
+}
+
+.badge-sosial {
+    background-color: #132043;
+    color: #F1B4BB;
+}
+
+.badge-kesehatan {
+    background-color: #e07060;
+    color: #ffffff;
+}
+
+.badge-lingkungan {
+    background-color: #3a8a5a;
+    color: #ffffff;
+}
+
+/* Judul kampanye */
+.card-judul {
+    font-size: 15px;
+    font-weight: bold;
+    color: #132043;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.card-penyelenggara {
+    font-size: 13px;
+    color: #444444;
+    margin-bottom: 4px;
+}
+
+.card-lokasi {
+    font-size: 13px;
+    color: #666666;
+    margin-bottom: 12px;
+}
+
+/* Progress Bar */
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: #e0e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+
+.progress-isi {
+    height: 100%;
+    background-color: #1F4172;
+    border-radius: 10px;
+}
+
+.progress-label {
+    font-size: 12px;
+    color: #555555;
+    margin-bottom: 12px;
+}
+
+/* Tabel Info */
+.card-info {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.card-info td {
+    padding: 3px 0;
+    color: #333333;
+    vertical-align: top;
+}
+
+.card-info td:first-child {
+    width: 120px;
+    color: #666666;
+}
+
+.card-info td:last-child {
+    font-weight: bold;
+    color: #132043;
+}
+
+/* Tombol Detail */
+.btn-detail {
+    display: block;
+    text-align: center;
+    background-color: #132043;
+    color: #FDF0F0;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: auto;
+    transition: background-color 0.2s;
+}
+
+.btn-detail:hover {
+    background-color: #1F4172;
+}
+
+/* ================================================
+   FOOTER
+================================================ */
+.footer {
+    background-color: #132043;
+    color: rgba(255, 255, 255, 0.75);
+    padding-top: 48px;
+    position: static;
+    width: 100%;
+    margin-top: auto;
+}
+
+.footer-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 36px;
+}
+
+.footer-kolom p {
+    font-size: 13px;
+    line-height: 1.8;
+    margin-top: 12px;
+    max-width: 260px;
+}
+
+.footer-kolom h4 {
+    color: #F1B4BB;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+}
+
+.footer-kolom ul li {
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.footer-kolom ul li a {
+    color: rgba(255, 255, 255, 0.65);
+    transition: color 0.2s;
+}
+
+.footer-kolom ul li a:hover {
+    color: #F1B4BB;
+}
+
+/* Footer bawah */
+.footer-bawah {
+    background-color: #0d1628;
+    padding: 14px 0;
+    text-align: center;
+}
+
+.footer-bawah p {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ================================================
+   RESPONSIVE - 2 KOLOM (Tablet)
+================================================ */
+@media (max-width: 900px) {
+    .grid-kampanye {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ================================================
+   RESPONSIVE - 1 KOLOM (HP)
+================================================ */
+@media (max-width: 600px) {
+    .header-inner {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .navbar {
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+    }
+
+    .form-pencarian {
+        flex-direction: column;
+    }
+
+    .form-group {
+        min-width: 100%;
+    }
+
+    .grid-kampanye {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* UDAH BUKAN BAGIAN HOME PAGE LAGI BYE */
