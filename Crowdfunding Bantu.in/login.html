@@ -8,39 +8,43 @@
 </head>
 <body>
     <header class="header">
-        <a class="logo">Bantu.in</a>
+        <a href="index.html" class="logo">♥︎ Bantu.in</a>
         <nav class="navbar-right">
-            <a href="index.html">Halaman Utama</a>
+            <a href="index.html">Beranda</a>
+            <a href="index.html">Kampanye</a>
+            <a href="index.html">Tentang Kami</a>
             <a href="login.html">Login</a>
         </nav>
     </header>
     
     <main class="loginContainer">
         <div class="loginPage">
-            <h2 id="tulisanLogin">LOGIN</h2>
-            <br>
+            <div class="login-header">
+                <span class="login-logo-icon">♥︎</span>
+                <h2 id="tulisanLogin">LOGIN</h2>
+                <p class="login-sub">Masuk ke akun Bantu.in kamu</p>
+            </div>
 
             <form>
-                <div>
+
+                <div class="login-field">
                     <label for="username">Username</label>
-                    <br>
                     <input type="text" id="username" name="username" placeholder="Masukkan username" required>
-
-                    <br><br>
-
-                    <label for="password">Password</label>
-                    <br>
-                    <input type="text" id="password" name="password" placeholder="Masukkan password" required>
-
-                    <br><br>
-
-                    <button id="login" type="submit">Login</button>
                 </div>
+
+                <div class="login-field">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Masukkan password" required>
+                </div>
+
+                <button id="login" type="submit">Login</button>
+
             </form>
         </div>
     </main>
+
     <footer class="footer">
-    <p>&copy; 2026 Bantu.in</p>
+        <p>&copy; 2026 Bantu.in &mdash; Platform Crowdfunding Sosial Indonesia</p>
     </footer>
 </body>
 </html>

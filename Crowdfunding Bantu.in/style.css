@@ -1,7 +1,14 @@
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
     background-color: #FDF0F0;
+}
+
+main {
+    flex: 1;
 }
 
 /*HEADER*/
@@ -27,6 +34,8 @@ body {
 .header a.logo {
     font-size: 20px;
     font-weight: bold;
+    color: #F1B4BB;
+    float: left;
 }
 
 .navbar-right a:hover {
@@ -168,8 +177,8 @@ Pink Krem (?) #FDF0F0*/
     background-color: #132043;
     padding: 20px;
     overflow: hidden;
-    position: sticky;
-    bottom: 0;
+    position: static;
+    bottom: auto;
 }
 
 .footer p{
@@ -189,7 +198,7 @@ Pink Krem (?) #FDF0F0*/
 /* BAGIAN LOGIN PAGE */
 
 main.loginContainer{
-    min-height: 70vh;
+    min-height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -197,18 +206,100 @@ main.loginContainer{
     letter-spacing: 1px;
 }
 
+.loginPage {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(19, 32, 67, 0.12);
+    padding: 40px 36px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+}
+
+.login-header {
+    margin-bottom: 28px;
+}
+
+.login-logo-icon {
+    font-size: 36px;
+    color: #F1B4BB;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.login-sub {
+    font-size: 13px;
+    color: #888888;
+    margin: 0;
+}
+
 h2#tulisanLogin {
-    letter-spacing: 10px;
+    font-size: 24px;
+    letter-spacing: 6px;
     color: #132043;
+    margin: 0 0 6px 0;
+}
+
+.login-field {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.login-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #132043;
+    margin-bottom: 6px;
+}
+
+.login-field input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #c8d0dc;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #FDF0F0;
+    color: #132043;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    outline: none;
+}
+
+.login-field input:focus {
+    border-color: #1F4172;
+    background-color: #ffffff;
+}
+
+.login-field input::placeholder {
+    color: #aaaaaa;
 }
 
 button#login {
-    background-color: #F1B4BB;
-    padding: 5px;
-    border-radius: 10px;
-    color: white;
-    border-color: #1F4172;
+    width: 100%;
+    padding: 11px;
+    background-color: #132043;
+    color: #FDF0F0;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background-color 0.2s;
+    font-family: Arial, sans-serif;
 }
+
+button#login:hover {
+    background-color: #1F4172;
+}
+
+button#login:active {
+    background-color: #F1B4BB;
+    color: #132043;
+}
+
+
 
 /* INI BAGIAN HOME PAGEE YH */
 /* ================================================
