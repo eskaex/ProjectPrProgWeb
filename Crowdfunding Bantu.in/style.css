@@ -186,16 +186,28 @@ Pink Krem (?) #FDF0F0*/
     margin-right: 150px;
 }
 
-.loginPage {
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+/* BAGIAN LOGIN PAGE */
+
+main.loginContainer{
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px;
+    letter-spacing: 1px;
 }
 
-button {
-    background-color: greenyellow;
+h2#tulisanLogin {
+    letter-spacing: 10px;
+    color: #132043;
+}
+
+button#login {
+    background-color: #F1B4BB;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    border-color: #1F4172;
 }
 
 /* INI BAGIAN HOME PAGEE YH */
