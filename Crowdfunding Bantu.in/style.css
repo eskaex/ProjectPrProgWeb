@@ -142,3 +142,14 @@ Pink Krem (?) #FDF0F0*/
     text-align: right;
     margin-right: 150px;
 }
+
+.loginPage {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+}
+
+button {
+    background-color: greenyellow;
+}

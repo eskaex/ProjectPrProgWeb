@@ -3,13 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login Page</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p class="login">P login</p>
-    <footer class="footer">
-        <p>&copy; 2026 Bantu.in</p>
-    </footer>
+    <div class="loginPage">
+        <h2>Login</h2>
+
+        <form>
+            <div>
+                <label for="username">Username</label>
+                <br>
+                <input type="text" id="username" name="username" placeholder="Masukkan username Anda" required>
+
+                <br><br>
+
+                <label for="password">Password</label>
+                <br>
+                <input type="text" id="password" name="password" placeholder="Masukkan password" required>
+
+                <br><br>
+
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+  <footer class="footer">
+    <p>&copy; 2026 Bantu.in</p>
+  </footer>
 </body>
 </html>
