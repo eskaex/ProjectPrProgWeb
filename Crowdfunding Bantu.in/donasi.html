@@ -16,20 +16,116 @@
     </header>
     
     <main>
-        <header class="header">
-            <div class="wadah header-dalam">
-                <div class="logo">
-                    <span class="logo-ikon">♥︎</span>
-                    <span class="logo-teks">Bantu.in</span>
-                </div>
-                <nav class="navbar">
-                    <a href="index.html" class="nav-tautan">Beranda</a>
-                    <a href="detail.html" class="nav-tautan">Detail Kampanye</a>
-                    <a href="login.html" class="nav-tombol">Login</a>
-                </nav>
-            </div>
-        </header>
+        <div class="don-hero">
+            <p class="don-hero-keterangan">Formulir Donasi</p>
+            <h1 class="don-hero-judul">Setiap Rupiah Memberi Harapan</h1>
+        </div>
+        <div class="don-tata-letak">
+            <div class="don-kartu">
+                <img src="gambar/detail1.jpeg" alt="Bantuan Mencari Bapak" class="don-kartu-gambar">
+                <div class="don-kartu-isi">
+                    <span class="don-label">Bencana Akal-akalan</span>
+                    <h2 class="don-judul">Bantuan Mencari Bapak</h2>
+                    <p class="don-lokasi">📍 Kab. Tokyo, Jepang · 🏢 Relawan Bantu.in</p>
 
+                    <div class="don-progres">
+                        <div class="don-progres-isi" style="width: 50%;"></div>
+                </div>
+                <div class="don-progres-info">
+                    <span><strong>Rp 500.000.000</strong> terkumpul</span>
+                    <span><strong>50%</strong> dari target</span>
+                </div>
+
+                <div class="don-statistik">
+                    <div class="don-statistik-item">
+                        <div class="don-statistik-label">Target Dana</div>
+                        <div class="don-statistik-nilai">Rp 1 Miliar</div>
+                    </div>
+                    <div class="don-statistik-item">
+                        <div class="don-statistik-label">Batas Waktu</div>
+                        <div class="don-statistik-nilai">1 Des 2027</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="don-panel">
+            <h3 class="don-panel-judul">💛 Formulir Donasi</h3>
+
+            <div class="don-kelompok">
+                <label class="don-keterangan-input" for="nama">Nama Lengkap</label>
+                <input class="don-masukan" type="text" id="nama" placeholder="Masukkan nama Anda...">
+            </div>
+
+            <div class="don-kelompok">
+                <label class="don-keterangan-input" for="email">Email</label>
+                <input class="don-masukan" type="email" id="email" placeholder="email@kamu.com">
+            </div>
+
+            <div class="don-kelompok">
+                <label class="don-keterangan-input">Nominal Donasi</label>
+                <div class="don-grid-nominal">
+                    <button class="don-tombol-nominal" onclick="pilihNominal(this, 25000)">Rp 25.000</button>
+                    <button class="don-tombol-nominal" onclick="pilihNominal(this, 50000)">Rp 50.000</button>
+                    <button class="don-tombol-nominal" onclick="pilihNominal(this, 100000)">Rp 100.000</button>
+                    <button class="don-tombol-nominal" onclick="pilihNominal(this, 250000)">Rp 250.000</button>
+            </div>
+            <div class="don-awalan-rp">
+                <span class="don-teks-rp">Rp</span>
+                <input class="don-masukan don-masukan-rp" type="number" id="nominal"
+                       placeholder="Jumlah lain..." min="1000" oninput="hitung()">
+            </div>
+        </div>
+
+        <div class="don-kelompok">
+            <label class="don-keterangan-input" for="pesan">Pesan (opsional)</label>
+            <textarea class="don-masukan don-area-teks" id="pesan" rows="3"
+                      placeholder="Tulis pesan dukungan..."></textarea>
+        </div>
+
+        <div class="don-kelompok">
+            <label class="don-anonim">
+                <input type="checkbox" id="anonim">
+                Sembunyikan nama saya (donasi anonim)
+            </label>
+        </div>
+
+        <div class="don-kelompok">
+            <label class="don-keterangan-input">Metode Pembayaran</label>
+            <div class="don-grid-bayar">
+                <div class="don-pilihan-bayar terpilih" onclick="pilihBayar(this)">
+                    <span class="don-ikon-bayar">🏦</span>Transfer
+                </div>
+                <div class="don-pilihan-bayar" onclick="pilihBayar(this)">
+                    <span class="don-ikon-bayar">💳</span>Kartu
+                </div>
+                <div class="don-pilihan-bayar" onclick="pilihBayar(this)">
+                    <span class="don-ikon-bayar">📱</span>E-Wallet
+                </div>
+            </div>
+        </div>
+
+        <hr class="don-pemisah">
+
+        <div class="don-baris-ringkasan">
+            <span>Donasi</span><span id="r-nominal">—</span>
+        </div>
+        <div class="don-baris-ringkasan">
+            <span>Biaya layanan</span><span id="r-biaya">—</span>
+        </div>
+        <div class="don-baris-ringkasan don-total">
+            <span>Total</span><span id="r-total">—</span>
+        </div>
+
+        <button class="don-tombol-kirim" onclick="kirimDonasi()">Donasi Sekarang →</button>
+
+        <!-- <div class="don-kepercayaan">
+            <span>🔒 SSL Aman</span>
+            <span>✅ Terverifikasi</span>
+            <span>🧾 Bukti Donasi</span>
+        </div> -->
+    </div>
+
+</div>
     </main>
 
     <footer class="footer">
