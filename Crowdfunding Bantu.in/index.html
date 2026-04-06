@@ -1,25 +1,393 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bantu.in - Crowdfunding and Donation Platform</title>
+    <title>Bantu.in - Platform Crowdfunding Sosial</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- ===== HEADER ===== -->
     <header class="header">
-        <a class="logo">Bantu.in</a>
-        <nav class="navbar-right">
-            <a href="index.html">Halaman Utama</a>
-            <a href="login.html">Login</a>
-        </nav>
+        <div class="container header-inner">
+            <div class="logo">
+                <span class="logo-icon">♥︎</span>
+                <span class="logo-text">Bantu.in</span>
+            </div>
+            <nav class="navbar">
+                <a href="index.html" class="nav-link aktif">Beranda</a>
+                <a href="#daftar-kampanye" class="nav-link">Kampanye</a>
+                <a href="index.html" class="nav-link">Tentang Kami</a>
+                <a href="login.html" class="btn-login">Login</a>
+            </nav>
+        </div>
     </header>
-    
 
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="container">
+            <h1>Bersama Kita Bisa Membantu Sesama</h1>
+            <p>Bantu.in adalah platform crowdfunding sosial yang menghubungkan donatur dengan kampanye nyata di seluruh Indonesia. Transparan, mudah, dan terpercaya.</p>
+            <a href="#daftar-kampanye" class="btn-utama">Lihat Kampanye</a>
+        </div>
+    </section>
+
+    <!-- ===== AREA PENCARIAN ===== -->
+    <section class="section-pencarian" id="pencarian">
+        <div class="container">
+            <h2>Cari Kampanye Donasi</h2>
+            <p class="sub-judul">Temukan kampanye yang sesuai dengan kepedulianmu</p>
+
+            <div class="form-pencarian">
+                <div class="form-group">
+                    <label for="judul">Judul Kampanye</label>
+                    <input type="text" id="judul" name="judul" placeholder="Cari judul kampanye...">
+                </div>
+                <div class="form-group">
+                    <label for="kategori">Kategori</label>
+                    <select id="kategori" name="kategori">
+                        <option value="">-- Semua Kategori --</option>
+                        <option value="bencana">Bencana Alam</option>
+                        <option value="pendidikan">Pendidikan</option>
+                        <option value="kesehatan">Kesehatan</option>
+                        <option value="lingkungan">Lingkungan</option>
+                        <option value="sosial">Sosial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="lokasi">Lokasi</label>
+                    <input type="text" id="lokasi" name="lokasi" placeholder="Contoh: Jakarta, NTT...">
+                </div>
+                <div class="form-group">
+                    <label for="dana">Rentang Target Dana</label>
+                    <select id="dana" name="dana">
+                        <option value="">-- Semua Rentang --</option>
+                        <option value="0-10">Kurang dari Rp 10.000.000</option>
+                        <option value="10-50">Rp 10.000.000 - Rp 50.000.000</option>
+                        <option value="50-100">Rp 50.000.000 - Rp 100.000.000</option>
+                        <option value="100+">Lebih dari Rp 100.000.000</option>
+                    </select>
+                </div>
+                <div class="form-group tombol-wrap">
+                    <button type="button" class="btn-cari">🔍 Cari</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DAFTAR KAMPANYE ===== -->
+    <section class="section-kampanye" id="daftar-kampanye">
+        <div class="container">
+            <h2>Kampanye Aktif Saat Ini</h2>
+            <p class="sub-judul">Semua kampanye di bawah ini sedang membutuhkan dukunganmu</p>
+
+            <div class="grid-kampanye">
+
+                <!-- Kampanye 1 -->
+                <div class="card-kampanye">
+                    <img src="https://images.unsplash.com/photo-1547683905-f686c993aae5?w=600&q=80"
+                         alt="Poster Bantuan Banjir Bandang Demak"
+                         class="card-poster">
+                    <div class="card-isi">
+                        <span class="badge badge-bencana">Bencana Alam</span>
+                        <h3 class="card-judul">Bantuan Banjir Bandang Demak</h3>
+                        <p class="card-penyelenggara">🏢 Penyelenggara: <strong>Relawan Peduli Demak</strong></p>
+                        <p class="card-lokasi">📍 Demak, Jawa Tengah</p>
+                        <div class="progress-bar">
+                            <div class="progress-isi" style="width: 70%;"></div>
+                        </div>
+                        <p class="progress-label">70% tercapai &mdash; Rp 35.000.000 dari Rp 50.000.000</p>
+                        <table class="card-info">
+                            <tr>
+                                <td>Target Dana</td>
+                                <td>: Rp 50.000.000</td>
+                            </tr>
+                            <tr>
+                                <td>Dana Terkumpul</td>
+                                <td>: Rp 35.000.000</td>
+                            </tr>
+                            <tr>
+                                <td>Deadline</td>
+                                <td>: 15 April 2026</td>
+                            </tr>
+                        </table>
+                        <a href="detail.html" class="btn-detail">Lihat Detail →</a>
+                    </div>
+                </div>
+
+                <!-- Kampanye 2 -->
+                <div class="card-kampanye">
+                    <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80"
+                         alt="Poster Renovasi Sekolah Pelosok NTT"
+                         class="card-poster">
+                    <div class="card-isi">
+                        <span class="badge badge-pendidikan">Pendidikan</span>
+                        <h3 class="card-judul">Renovasi Sekolah Pelosok NTT</h3>
+                        <p class="card-penyelenggara">🏢 Penyelenggara: <strong>Yayasan Cerdas Nusantara</strong></p>
+                        <p class="card-lokasi">📍 Kupang, Nusa Tenggara Timur</p>
+                        <div class="progress-bar">
+                            <div class="progress-isi" style="width: 10%;"></div>
+                        </div>
+                        <p class="progress-label">10% tercapai &mdash; Rp 10.000.000 dari Rp 100.000.000</p>
+                        <table class="card-info">
+                            <tr>
+                                <td>Target Dana</td>
+                                <td>: Rp 100.000.000</td>
+                            </tr>
+                            <tr>
+                                <td>Dana Terkumpul</td>
+                                <td>: Rp 10.000.000</td>
+                            </tr>
+                            <tr>
+                                <td>Deadline</td>
+                                <td>: 30 Mei 2026</td>
+                            </tr>
+                        </table>
+                        <a href="detail.html" class="btn-detail">Lihat Detail →</a>
+                    </div>
+                </div>
+
+                <!-- Kampanye 3 -->
+                <div class="card-kampanye">
+                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&q=80"
+                         alt="Poster Ketahanan Pangan Sulawesi Selatan"
+                         class="card-poster">
+                    <div class="card-isi">
+                        <span class="badge badge-sosial">Sosial</span>
+                        <h3 class="card-judul">Ketahanan Pangan Sulawesi Selatan</h3>
+                        <p class="card-penyelenggara">🏢 Penyelenggara: <strong>Komunitas Tani Nusantara</strong></p>
+                        <p class="card-lokasi">📍 Makassar, Sulawesi Selatan</p>
+                        <div class="progress-bar">
+                            <div class="progress-isi" style="width: 45%;"></div>
+                        </div>
+                        <p class="progress-label">45% tercapai &mdash; Rp 22.500.000 dari Rp 50.000.000</p>
+                        <table class="card-info">
+                            <tr>
+                                <td>Target Dana</td>
+                                <td>: Rp 50.000.000</td>
+                            </tr>
+                            <tr>
+                                <td>Dana Terkumpul</td>
+                                <td>: Rp 22.500.000</td>
+                            </tr>
+                            <tr>
+                                <td>Deadline</td>
+                                <td>: 20 Juni 2026</td>
+                            </tr>
+                        </table>
+                        <a href="detail.html" class="btn-detail">Lihat Detail →</a>
+                    </div>
+                </div>
+
+                <!-- Kampanye 4 -->
+                <div class="card-kampanye">
+                    <img src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=600&q=80"
+                         alt="Poster Beasiswa Anak Papua Berprestasi"
+                         class="card-poster">
+                    <div class="card-isi">
+                        <span class="badge badge-pendidikan">Pendidikan</span>
+                        <h3 class="card-judul">Beasiswa Anak Papua Berprestasi</h3>
+                        <p class="card-penyelenggara">🏢 Penyelenggara: <strong>Yayasan Harapan Timur</strong></p>
+                        <p class="card-lokasi">📍 Jayapura, Papua</p>
+                        <div class="progress-bar">
+                            <div class="progress-isi" style="width: 60%;"></div>
+                        </div>
+                        <p class="progress-label">60% tercapai &mdash; Rp 45.000.000 dari Rp 75.000.000</p>
+                        <table class="card-info">
+                            <tr>
+                                <td>Target Dana</td>
+                                <td>: Rp 75.000.000</td>
+                            </tr>
+                            <tr>
+                                <td>Dana Terkumpul</td>
+                                <td>: Rp 45.000.000</td>
+                            </tr>
+                            <tr>
+                                <td>Deadline</td>
+                                <td>: 1 Juli 2026</td>
+                            </tr>
+                        </table>
+                        <a href="detail.html" class="btn-detail">Lihat Detail →</a>
+                    </div>
+                </div>
+
+                <!-- Kampanye 5 -->
+                <div class="card-kampanye">
+                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=600&q=80"
+                         alt="Poster Kesehatan Ibu dan Anak Pedesaan"
+                         class="card-poster">
+                    <div class="card-isi">
+                        <span class="badge badge-kesehatan">Kesehatan</span>
+                        <h3 class="card-judul">Kesehatan Ibu dan Anak Pedesaan</h3>
+                        <p class="card-penyelenggara">🏢 Penyelenggara: <strong>Dokter Nusantara</strong></p>
+                        <p class="card-lokasi">📍 Garut, Jawa Barat</p>
+                        <div class="progress-bar">
+                            <div class="progress-isi" style="width: 30%;"></div>
+                        </div>
+                        <p class="progress-label">30% tercapai &mdash; Rp 15.000.000 dari Rp 50.000.000</p>
+                        <table class="card-info">
+                            <tr>
+                                <td>Target Dana</td>
+                                <td>: Rp 50.000.000</td>
+                            </tr>
+                            <tr>
+                                <td>Dana Terkumpul</td>
+                                <td>: Rp 15.000.000</td>
+                            </tr>
+                            <tr>
+                                <td>Deadline</td>
+                                <td>: 10 Agustus 2026</td>
+                            </tr>
+                        </table>
+                        <a href="detail.html" class="btn-detail">Lihat Detail →</a>
+                    </div>
+                </div>
+
+                <!-- Kampanye 6 -->
+                <div class="card-kampanye">
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80"
+                         alt="Poster Penghijauan Kota Bersama"
+                         class="card-poster">
+                    <div class="card-isi">
+                        <span class="badge badge-lingkungan">Lingkungan</span>
+                        <h3 class="card-judul">Penghijauan Kota Bersama</h3>
+                        <p class="card-penyelenggara">🏢 Penyelenggara: <strong>Gerakan Hijau Indonesia</strong></p>
+                        <p class="card-lokasi">📍 Bandung, Jawa Barat</p>
+                        <div class="progress-bar">
+                            <div class="progress-isi" style="width: 85%;"></div>
+                        </div>
+                        <p class="progress-label">85% tercapai &mdash; Rp 42.500.000 dari Rp 50.000.000</p>
+                        <table class="card-info">
+                            <tr>
+                                <td>Target Dana</td>
+                                <td>: Rp 50.000.000</td>
+                            </tr>
+                            <tr>
+                                <td>Dana Terkumpul</td>
+                                <td>: Rp 42.500.000</td>
+                            </tr>
+                            <tr>
+                                <td>Deadline</td>
+                                <td>: 5 September 2026</td>
+                            </tr>
+                        </table>
+                        <a href="detail.html" class="btn-detail">Lihat Detail →</a>
+                    </div>
+                </div>
+
+                <!-- Kampanye 7 -->
+                <div class="card-kampanye">
+                    <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80"
+                         alt="Poster Bantu Korban Gempa Cianjur"
+                         class="card-poster">
+                    <div class="card-isi">
+                        <span class="badge badge-bencana">Bencana Alam</span>
+                        <h3 class="card-judul">Bantu Korban Gempa Cianjur</h3>
+                        <p class="card-penyelenggara">🏢 Penyelenggara: <strong>PMI Cianjur</strong></p>
+                        <p class="card-lokasi">📍 Cianjur, Jawa Barat</p>
+                        <div class="progress-bar">
+                            <div class="progress-isi" style="width: 92%;"></div>
+                        </div>
+                        <p class="progress-label">92% tercapai &mdash; Rp 184.000.000 dari Rp 200.000.000</p>
+                        <table class="card-info">
+                            <tr>
+                                <td>Target Dana</td>
+                                <td>: Rp 200.000.000</td>
+                            </tr>
+                            <tr>
+                                <td>Dana Terkumpul</td>
+                                <td>: Rp 184.000.000</td>
+                            </tr>
+                            <tr>
+                                <td>Deadline</td>
+                                <td>: 30 April 2026</td>
+                            </tr>
+                        </table>
+                        <a href="detail.html" class="btn-detail">Lihat Detail →</a>
+                    </div>
+                </div>
+
+                <!-- Kampanye 8 -->
+                <div class="card-kampanye">
+                    <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=600&q=80"
+                         alt="Poster Penyediaan Air Bersih NTB"
+                         class="card-poster">
+                    <div class="card-isi">
+                        <span class="badge badge-kesehatan">Kesehatan</span>
+                        <h3 class="card-judul">Penyediaan Air Bersih untuk NTB</h3>
+                        <p class="card-penyelenggara">🏢 Penyelenggara: <strong>Yayasan Air untuk Semua</strong></p>
+                        <p class="card-lokasi">📍 Lombok, Nusa Tenggara Barat</p>
+                        <div class="progress-bar">
+                            <div class="progress-isi" style="width: 55%;"></div>
+                        </div>
+                        <p class="progress-label">55% tercapai &mdash; Rp 44.000.000 dari Rp 80.000.000</p>
+                        <table class="card-info">
+                            <tr>
+                                <td>Target Dana</td>
+                                <td>: Rp 80.000.000</td>
+                            </tr>
+                            <tr>
+                                <td>Dana Terkumpul</td>
+                                <td>: Rp 44.000.000</td>
+                            </tr>
+                            <tr>
+                                <td>Deadline</td>
+                                <td>: 15 Juli 2026</td>
+                            </tr>
+                        </table>
+                        <a href="detail.html" class="btn-detail">Lihat Detail →</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
     <footer class="footer">
-        <p>&copy; 2026 Bantu.in</p>
+        <div class="container footer-inner">
+            <div class="footer-kolom">
+                <div class="logo logo-footer">
+                    <span class="logo-icon">♥︎</span>
+                    <span class="logo-text">Bantu.in</span>
+                </div>
+                <p>Platform crowdfunding sosial yang transparan dan terpercaya. Bersama kita bisa membantu sesama di seluruh Indonesia.</p>
+            </div>
+            <div class="footer-kolom">
+                <h4>Navigasi</h4>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="#daftar-kampanye">Kampanye</a></li>
+                    <li><a href="index.html">Tentang Kami</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-kolom">
+                <h4>Kategori</h4>
+                <ul>
+                    <li><a href="index.html">Bencana Alam</a></li>
+                    <li><a href="index.html">Pendidikan</a></li>
+                    <li><a href="index.html">Kesehatan</a></li>
+                    <li><a href="index.html">Lingkungan</a></li>
+                    <li><a href="index.html">Sosial</a></li>
+                </ul>
+            </div>
+            <div class="footer-kolom">
+                <h4>Hubungi Kami</h4>
+                <ul>
+                    <li>📧 info@bantu.in</li>
+                    <li>📞 (021) 1234-5678</li>
+                    <li>📍 Jakarta, Indonesia</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bawah">
+            <div class="container">
+                <p>&copy; 2026 Bantu.in &mdash; Platform Crowdfunding Sosial Indonesia. Semua Hak Dilindungi.</p>
+            </div>
+        </div>
     </footer>
+
 </body>
-</html> 
-
-
+</html>
