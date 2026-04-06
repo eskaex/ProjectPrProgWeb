@@ -1,11 +1,10 @@
-/**/
 body {
     margin: 0;
     padding: 0;
     background-color: #FDF0F0;
 }
 
-/*HEADER PART*/
+/*HEADER*/
 .header {
     background-color: #132043;
     padding: 10px;
@@ -168,7 +167,7 @@ Pink Krem (?) #FDF0F0*/
     text-align: center;
 }
 
-/*FOOTER PART*/
+/*FOOTER*/
 .footer {
     background-color: #132043;
     padding: 20px;
