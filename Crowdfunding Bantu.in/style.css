@@ -31,13 +31,13 @@ body {
 }
 
 .navbar-right a:hover {
-  background-color: #FDF0F0;
-  color: #132043;
+    background-color: #FDF0F0;
+    color: #132043;
 }
 
 .navbar-right a.active {
-  background-color: #F1B4BB;
-  color: #1F4172;
+    background-color: #F1B4BB;
+    color: #1F4172;
 }
 
 .navbar-right {
@@ -134,10 +134,6 @@ Pink Krem (?) #FDF0F0*/
     color: white;
     font-size: 12px;
     line-height: 20px;
-}
-
-.btn{
-    margin-bottom: 0;
 }
 
 .btn, .btn-donasi {
