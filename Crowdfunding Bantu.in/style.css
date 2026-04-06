@@ -61,11 +61,21 @@ Pink Krem (?) #FDF0F0*/
     background: white;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: #1F4172;
+    box-shadow: 0 2px 12px #1F417226;
+    margin-top: 20px;
 }
 
 .col-main {
     flex: 2;
+}
+.col-main h3{
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.deskripsi{
+    margin-top: 10px;
+    text-align: justify;
 }
 
 .col-sidebar {
@@ -75,10 +85,37 @@ Pink Krem (?) #FDF0F0*/
     border-radius: 8px;
 }
 
+.organizer-info{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.organizer-logo{
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+.rekening-info{
+    margin-top: 10px;
+}
+
 .detail-img {
     width: 100%;
+    height: auto;
     border-radius: 8px;
     margin-bottom: 20px;
+}
+
+.category-badge{
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #F1B4BB;
+    color: #132043;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
 }
 
 .progress-container {
@@ -99,6 +136,10 @@ Pink Krem (?) #FDF0F0*/
     line-height: 20px;
 }
 
+.btn{
+    margin-bottom: 0;
+}
+
 .btn, .btn-donasi {
     display: inline-block;
     background-color: #132043;
@@ -106,19 +147,25 @@ Pink Krem (?) #FDF0F0*/
     padding: 10px 15px;
     text-decoration: none;
     border-radius: 6px;
-
 }
 
 .btn:hover, .btn-donasi:hover {
-    background-color: #FDF0F0;
-    color: #132043;
-    outline: 2px solid #132043; 
+    background-color: #1F4172;
+    color: #FDF0F0;
 }
 
 .btn:active, .btn-donasi:active {
     background-color: #F1B4BB;
     color: #1F4172;
-    outline: none;
+}
+
+.btn-donasi{
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 18px;
+    margin-top: 20px;
+    text-align: center;
 }
 
 /*FOOTER PART*/
