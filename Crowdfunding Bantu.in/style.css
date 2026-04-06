@@ -123,8 +123,10 @@ Pink Krem (?) #FDF0F0*/
 /*FOOTER PART*/
 .footer {
     background-color: #132043;
-    padding: 1px 1px;
+    padding: 20px;
     overflow: hidden;
+    position: sticky;
+    bottom: 0;
 }
 
 .footer p{
