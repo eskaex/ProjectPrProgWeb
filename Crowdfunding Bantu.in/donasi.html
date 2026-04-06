@@ -7,12 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="header">
-        <a class="logo">Bantu.in</a>
-        <nav class="navbar-right">
-            <a href="index.html">Halaman Utama</a>
-            <a href="login.html">Login</a>
-        </nav>
+    <header class="home-header">
+        <div class="home-header-inner">
+            <a href="index.html" class="home-logo">
+                <span class="home-logo-icon">♥︎</span>
+                <span class="home-logo-text">Bantu.in</span>
+            </a>
+            <nav class="home-navbar">
+                <a href="index.html" class="home-nav-link">Beranda</a>
+                <a href="index.html#daftar-kampanye" class="home-nav-link">Kampanye</a>
+                <a href="index.html" class="home-nav-link">Tentang Kami</a>
+                <a href="login.html" class="home-btn-login">Login</a>
+            </nav>
+        </div>
     </header>
     
     <main>
@@ -77,6 +84,12 @@
         </div>
 
         <div class="don-kelompok">
+            <label class="don-keterangan-input" for="bukti-pembayaran">Bukti Transfer (PDF, JPG, PNG)</label>
+            <input class="don-masukan" type="file" id="bukti-pembayaran" name="bukti_file" accept=".pdf, .jpg, .jpeg, .png">
+            <small class="don-info-file">*Maksimal ukuran file 2MB</small>
+        </div>
+
+        <div class="don-kelompok">
             <label class="don-anonim">
                 <input type="checkbox" id="anonim">
                 Sembunyikan nama saya (donasi anonim)
@@ -116,7 +129,7 @@
     </main>
 
     <footer class="footer">
-        <p>&copy; 2026 Bantu.in</p>
+        <p>&copy; 2026 Bantu.in &mdash; Platform Crowdfunding Sosial Indonesia</p>
     </footer>
 </body>
 </html>
