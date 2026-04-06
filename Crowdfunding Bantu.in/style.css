@@ -877,11 +877,6 @@ button#login:active {
 
 /* BAGIAN DONASI.HATEMEL */
 
-/* ================================================
-   VERSI SIMPEL - HALAMAN DONASI
-   ================================================ */
-
-/* Hero Section */
 .don-hero {
     background: #1F4172;
     color: #ffffff;
@@ -894,7 +889,6 @@ button#login:active {
     margin-top: 10px;
 }
 
-/* Layout Grid */
 .don-tata-letak {
     max-width: 1000px;
     margin: -30px auto 50px;
@@ -904,7 +898,6 @@ button#login:active {
     padding: 0 20px;
 }
 
-/* Kartu Kiri & Panel Kanan */
 .don-kartu, .don-panel {
     background: #ffffff;
     border-radius: 10px;
@@ -920,7 +913,6 @@ button#login:active {
     margin-bottom: 15px;
 }
 
-/* Input & Form */
 .don-kelompok {
     margin-bottom: 15px;
 }
@@ -934,29 +926,6 @@ button#login:active {
     box-sizing: border-box;
 }
 
-/* Tombol Nominal */
-.don-grid-nominal {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 10px;
-}
-
-.don-tombol-nominal {
-    padding: 8px;
-    border: 1px solid #1F4172;
-    background: #fff;
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.don-tombol-nominal:hover {
-    background: #1F4172;
-    color: #fff;
-}
-
-/* Metode Bayar */
 .don-grid-bayar {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -972,12 +941,6 @@ button#login:active {
     font-size: 12px;
 }
 
-.don-pilihan-bayar.terpilih {
-    background: #F1B4BB;
-    border-color: #132043;
-}
-
-/* Progress Bar */
 .don-progres {
     background: #eee;
     height: 10px;
@@ -991,7 +954,6 @@ button#login:active {
     border-radius: 5px;
 }
 
-/* Tombol Utama */
 .don-tombol-kirim {
     width: 100%;
     padding: 15px;
@@ -1008,7 +970,6 @@ button#login:active {
     background: #1F4172;
 }
 
-/* Ringkasan */
 .don-baris-ringkasan {
     display: flex;
     justify-content: space-between;
@@ -1021,4 +982,55 @@ button#login:active {
     border-top: 1px solid #eee;
     padding-top: 10px;
     margin-top: 10px;
+}
+
+.don-pilihan-bayar {
+    background-color: #ffffff;
+    border: 1px solid #c8d0dc;
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.don-pilihan-bayar:hover {
+    background-color: #FDF0F0;
+    border-color: #F1B4BB;
+    transform: translateY(-3px);
+}
+
+.don-pilihan-bayar.terpilih {
+    background-color: #F1B4BB;
+    border-color: #132043;
+    color: #132043;
+    font-weight: bold;
+}
+
+.don-ikon-bayar {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.don-container-back {
+    max-width: 1000px;
+    margin: 0 auto 15px;
+    text-align: left;
+}
+
+.don-btn-back {
+    display: inline-block;
+    text-decoration: none;
+    color: #FDF0F0;
+    font-size: 13px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.don-btn-back:hover {
+    background: #F1B4BB;
+    color: #132043;
 }

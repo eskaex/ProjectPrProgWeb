@@ -17,6 +17,9 @@
     
     <main>
         <div class="don-hero">
+            <div class="don-nav-back">
+                <a href="detail.html" class="don-btn-back">← Kembali ke Detail</a>
+            </div>
             <p class="don-hero-keterangan">Formulir Donasi</p>
             <h1 class="don-hero-judul">Setiap Rupiah Memberi Harapan</h1>
         </div>
@@ -39,11 +42,11 @@
                 <div class="don-statistik">
                     <div class="don-statistik-item">
                         <div class="don-statistik-label">Target Dana</div>
-                        <div class="don-statistik-nilai">Rp 1 Miliar</div>
+                        <div class="don-statistik-nilai">Rp 1.000.000.000</div>
                     </div>
                     <div class="don-statistik-item">
                         <div class="don-statistik-label">Batas Waktu</div>
-                        <div class="don-statistik-nilai">1 Des 2027</div>
+                        <div class="don-statistik-nilai">1 Desember 2027</div>
                     </div>
                 </div>
             </div>
@@ -62,24 +65,15 @@
             </div>
 
             <div class="don-kelompok">
-                <label class="don-keterangan-input">Nominal Donasi</label>
-                <div class="don-grid-nominal">
-                    <button class="don-tombol-nominal" onclick="pilihNominal(this, 25000)">Rp 25.000</button>
-                    <button class="don-tombol-nominal" onclick="pilihNominal(this, 50000)">Rp 50.000</button>
-                    <button class="don-tombol-nominal" onclick="pilihNominal(this, 100000)">Rp 100.000</button>
-                    <button class="don-tombol-nominal" onclick="pilihNominal(this, 250000)">Rp 250.000</button>
-            </div>
-            <div class="don-awalan-rp">
-                <span class="don-teks-rp">Rp</span>
-                <input class="don-masukan don-masukan-rp" type="number" id="nominal"
-                       placeholder="Jumlah lain..." min="1000" oninput="hitung()">
-            </div>
+                <label class="don-keterangan-input">Jumlah Donasi</label>
+                <div class="don-awalan-rp">
+                    <input class="don-masukan don-masukan-rp" type="number" id="nominal" placeholder="Masukkan nominal" min="1000" oninput="hitung()">
+                </div>
         </div>
 
         <div class="don-kelompok">
             <label class="don-keterangan-input" for="pesan">Pesan (opsional)</label>
-            <textarea class="don-masukan don-area-teks" id="pesan" rows="3"
-                      placeholder="Tulis pesan dukungan..."></textarea>
+            <textarea class="don-masukan don-area-teks" id="pesan" rows="3" placeholder="Tulis pesan dukungan..."></textarea>
         </div>
 
         <div class="don-kelompok">
@@ -92,7 +86,7 @@
         <div class="don-kelompok">
             <label class="don-keterangan-input">Metode Pembayaran</label>
             <div class="don-grid-bayar">
-                <div class="don-pilihan-bayar terpilih" onclick="pilihBayar(this)">
+                <div class="don-pilihan-bayar" onclick="pilihBayar(this)">
                     <span class="don-ikon-bayar">🏦</span>Transfer
                 </div>
                 <div class="don-pilihan-bayar" onclick="pilihBayar(this)">
@@ -117,14 +111,7 @@
         </div>
 
         <button class="don-tombol-kirim" onclick="kirimDonasi()">Donasi Sekarang →</button>
-
-        <!-- <div class="don-kepercayaan">
-            <span>🔒 SSL Aman</span>
-            <span>✅ Terverifikasi</span>
-            <span>🧾 Bukti Donasi</span>
-        </div> -->
     </div>
-
 </div>
     </main>
 
