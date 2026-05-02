@@ -3,7 +3,7 @@ session_start();
 require 'koneksi.php';
 
 // Konfigurasi Pagination
-$limit = 6; // Jumlah kampanye per halaman
+$limit = 6;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 
@@ -12,7 +12,7 @@ $search_judul = isset($_GET['judul']) ? $_GET['judul'] : '';
 $search_kategori = isset($_GET['kategori']) ? $_GET['kategori'] : '';
 $search_lokasi = isset($_GET['lokasi']) ? $_GET['lokasi'] : '';
 
-// Membuat kueri dasar (Hanya mengambil kampanye yang batas waktunya >= hari ini)
+// kampanye yang batas waktunya >= hari ini
 $sql_base = "
     FROM kampanye k
     JOIN users u ON k.penyelenggara_id = u.id
@@ -20,7 +20,7 @@ $sql_base = "
     WHERE k.batas_waktu >= CURDATE()
 ";
 
-// Menambahkan filter pencarian
+// filter pencarian
 $params = [];
 $types = "";
 
@@ -40,7 +40,6 @@ if (!empty($search_lokasi)) {
     $types .= "s";
 }
 
-// Menghitung total data untuk pagination
 $sql_count = "SELECT COUNT(DISTINCT k.id) as total " . $sql_base;
 $stmt_count = $conn->prepare($sql_count);
 if (!empty($params)) {
@@ -50,8 +49,6 @@ $stmt_count->execute();
 $total_data = $stmt_count->get_result()->fetch_assoc()['total'];
 $total_pages = ceil($total_data / $limit);
 
-// Kueri utama untuk mengambil data dengan Aggregation untuk dana terkumpul
-// Diurutkan dari deadline paling dekat, lalu dana target paling kecil
 $sql_data = "
     SELECT k.*, u.nama AS nama_penyelenggara, 
            COALESCE(SUM(d.nominal), 0) AS dana_terkumpul 
@@ -68,6 +65,9 @@ $types .= "ii";
 $stmt_data->bind_param($types, ...$params);
 $stmt_data->execute();
 $result = $stmt_data->get_result();
+$sql_info = "SELECT * FROM info_website LIMIT 1";
+$result_info = $conn->query($sql_info);
+$info_web = $result_info->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -78,7 +78,6 @@ $result = $stmt_data->get_result();
     <title>Bantu.in - Platform Crowdfunding Sosial</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Tambahan CSS sederhana untuk pagination */
         .pagination { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
         .page-link { padding: 8px 16px; background: #132043; color: white; border-radius: 5px; text-decoration: none; }
         .page-link:hover { background: #1F4172; }
@@ -99,7 +98,6 @@ $result = $stmt_data->get_result();
                 <a href="#daftar-kampanye" class="home-nav-link">Kampanye</a>
                 <a href="#" class="home-nav-link">Tentang Kami</a>
                 
-                <!-- Logika Perubahan Tombol Login/Logout -->
                 <?php if(isset($_SESSION['user_id'])): ?>
                     <span style="color:white; font-size:14px; margin-right:10px;">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
                     <a href="logout.php" class="home-btn-login" style="background-color: #ff4d4d; color: white;">Logout</a>
@@ -123,7 +121,6 @@ $result = $stmt_data->get_result();
     <section class="home-section-pencarian" id="pencarian">
         <div class="home-container">
             <h2>Cari Kampanye Donasi</h2>
-            <!-- Form menggunakan method GET agar query string terbawa di URL -->
             <form action="index.php" method="GET" class="home-form-pencarian">
                 <div class="home-form-group">
                     <label for="judul">Judul Kampanye</label>
@@ -160,15 +157,13 @@ $result = $stmt_data->get_result();
                 <?php if($result->num_rows > 0): ?>
                     <?php while($row = $result->fetch_assoc()): ?>
                         <div class="home-card-kampanye">
-                            <!-- Gambar diambil dari database -->
                             <img src="<?= htmlspecialchars($row['gambar']) ?>" alt="Poster Kampanye" class="home-card-poster">
                             <div class="home-card-isi">
                                 <span class="home-badge home-badge-<?= htmlspecialchars($row['kategori']) ?>"><?= ucfirst(htmlspecialchars($row['kategori'])) ?></span>
                                 <h3 class="home-card-judul"><?= htmlspecialchars($row['judul']) ?></h3>
                                 <p class="home-card-penyelenggara">🏢 Penyelenggara: <strong><?= htmlspecialchars($row['nama_penyelenggara']) ?></strong></p>
                                 
-                                <!-- INSTRUKSI: Lokasi dan Progress bar telah dihapus dari sini -->
-
+                                
                                 <table class="home-card-info" style="margin-top:15px;">
                                     <tr>
                                         <td>Target Dana</td>
@@ -183,7 +178,6 @@ $result = $stmt_data->get_result();
                                         <td>: <?= date('d M Y', strtotime($row['batas_waktu'])) ?></td>
                                     </tr>
                                 </table>
-                                <!-- Link dinamis menuju detail.php membawa ID kampanye -->
                                 <a href="detail.php?id=<?= $row['id'] ?>" class="home-btn-detail">Lihat Detail →</a>
                             </div>
                         </div>
@@ -197,7 +191,6 @@ $result = $stmt_data->get_result();
             <?php if($total_pages > 1): ?>
             <div class="pagination">
                 <?php 
-                // Menyusun query string agar filter pencarian tidak hilang saat pindah halaman
                 $query_string = "";
                 if(!empty($search_judul)) $query_string .= "&judul=$search_judul";
                 if(!empty($search_kategori)) $query_string .= "&kategori=$search_kategori";
@@ -216,6 +209,42 @@ $result = $stmt_data->get_result();
 
     <!-- ===== FOOTER ===== -->
     <footer class="home-footer">
+        <div class="home-footer-inner">
+            <div class="home-footer-kolom">
+                <div class="home-logo logo-footer">
+                    <span class="home-logo-icon">♥︎</span>
+                    <span class="home-logo-text">Bantu.in</span>
+                </div>
+                <p><?= htmlspecialchars($info_web['deskripsi']) ?></p>
+            </div>
+            <div class="home-footer-kolom">
+                <h4>Navigasi</h4>
+                <ul>
+                    <li><a href="index.php">Beranda</a></li>
+                    <li><a href="#daftar-kampanye">Kampanye</a></li>
+                    <li><a href="#">Tentang Kami</a></li>
+                    <li><a href="<?= isset($_SESSION['user_id']) ? 'logout.php' : 'login.php' ?>"><?= isset($_SESSION['user_id']) ? 'Logout' : 'Login' ?></a></li>
+                </ul>
+            </div>
+            <div class="home-footer-kolom">
+                <h4>Kategori</h4>
+                <ul>
+                    <li><a href="index.php?kategori=bencana">Bencana Alam</a></li>
+                    <li><a href="index.php?kategori=pendidikan">Pendidikan</a></li>
+                    <li><a href="index.php?kategori=kesehatan">Kesehatan</a></li>
+                    <li><a href="index.php?kategori=lingkungan">Lingkungan</a></li>
+                    <li><a href="index.php?kategori=sosial">Sosial</a></li>
+                </ul>
+            </div>
+            <div class="home-footer-kolom">
+                <h4>Hubungi Kami</h4>
+                <ul>
+                    <li>📧 <?= htmlspecialchars($info_web['email']) ?></li>
+                    <li>📞 <?= htmlspecialchars($info_web['no_telepon']) ?></li>
+                    <li>📍 <?= htmlspecialchars($info_web['alamat']) ?></li>
+                </ul>
+            </div>
+        </div>
         <div class="home-footer-bawah">
             <div class="home-container">
                 <p>&copy; 2026 Bantu.in &mdash; Platform Crowdfunding Sosial Indonesia. Semua Hak Dilindungi.</p>
