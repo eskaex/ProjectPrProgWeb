@@ -96,6 +96,9 @@ $info_web = $result_info->fetch_assoc();
             <nav class="home-navbar">
                 <a href="index.php" class="home-nav-link aktif">Beranda</a>
                 <a href="#daftar-kampanye" class="home-nav-link">Kampanye</a>
+                <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'penyelenggara'): ?>
+                <a href="dashboard.php" class="home-nav-link" style="color: #1F4172; font-weight: bold;">Dasbor Saya</a>
+                <?php endif; ?>
                 <a href="#" class="home-nav-link">Tentang Kami</a>
                 
                 <?php if(isset($_SESSION['user_id'])): ?>
