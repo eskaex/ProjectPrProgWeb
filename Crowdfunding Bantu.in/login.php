@@ -1,23 +1,58 @@
+<?php
+session_start();
+require 'koneksi.php'; // Memanggil koneksi database
+
+$error = "";
+
+// Jika form disubmit
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password']; // Enkripsi MD5 sesuai database
+
+    // Cek user di database
+    $query = "SELECT * FROM users WHERE username = ? AND password = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ss", $username, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+        
+        // Simpan data ke session
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['nama']    = $user['nama'];
+        $_SESSION['role']    = $user['role'];
+
+        // Arahkan ke halaman utama
+        header("Location: index.php");
+        exit;
+    } else {
+        $error = "Username atau password salah!";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Login - Bantu.in</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="home-header">
         <div class="home-header-inner">
-            <a href="index.html" class="home-logo">
+            <a href="index.php" class="home-logo" style="text-decoration: none;">
                 <span class="home-logo-icon">♥︎</span>
                 <span class="home-logo-text">Bantu.in</span>
             </a>
             <nav class="home-navbar">
-                <a href="index.html" class="home-nav-link">Beranda</a>
-                <a href="index.html#daftar-kampanye" class="home-nav-link">Kampanye</a>
-                <a href="index.html" class="home-nav-link">Tentang Kami</a>
-                <a href="login.html" class="home-btn-login">Login</a>
+                <a href="index.php" class="home-nav-link">Beranda</a>
+                <a href="index.php#daftar-kampanye" class="home-nav-link">Kampanye</a>
+                <a href="#" class="home-nav-link">Tentang Kami</a>
+                <a href="login.php" class="home-btn-login">Login</a>
             </nav>
         </div>
     </header>
@@ -30,8 +65,13 @@
                 <p class="login-sub">Masuk ke akun Bantu.in kamu</p>
             </div>
 
-            <form action="index.html">
+            <!-- Tampilkan error jika login gagal -->
+            <?php if(!empty($error)): ?>
+                <p style="color: red; text-align: center; margin-bottom: 15px; font-weight: bold;"><?= $error ?></p>
+            <?php endif; ?>
 
+            <!-- Action kosong agar diproses di file ini sendiri -->
+            <form action="" method="POST">
                 <div class="login-field">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" placeholder="Masukkan username" required>
@@ -43,7 +83,6 @@
                 </div>
 
                 <button id="login" type="submit">Login</button>
-
             </form>
         </div>
     </main>
