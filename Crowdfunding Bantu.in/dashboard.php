@@ -1,0 +1,168 @@
+<?php
+session_start();
+require 'koneksi.php';
+
+// PROTEKSI HALAMAN: Hanya boleh diakses oleh yang sudah login dan rolenya 'penyelenggara'
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'penyelenggara') {
+    header("Location: index.php");
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+
+// Kueri untuk mengambil kampanye milik penyelenggara yang sedang login, 
+// beserta total dana VERIFIED (Terkumpul) dan PENDING
+$sql = "
+    SELECT k.id, k.judul, k.target_dana, k.gambar,
+           COALESCE(SUM(CASE WHEN d.status = 'VERIFIED' THEN d.nominal ELSE 0 END), 0) AS dana_terkumpul,
+           COALESCE(SUM(CASE WHEN d.status = 'PENDING' THEN d.nominal ELSE 0 END), 0) AS dana_pending
+    FROM kampanye k
+    LEFT JOIN donasi d ON k.id = d.kampanye_id
+    WHERE k.penyelenggara_id = ?
+    GROUP BY k.id
+    ORDER BY k.created_at DESC
+";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// --- Ambil Data Info Website untuk Footer ---
+$sql_info = "SELECT * FROM info_website LIMIT 1";
+$result_info = $conn->query($sql_info);
+$info_web = $result_info->fetch_assoc();
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dasbor Penyelenggara - Bantu.in</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS Tambahan Khusus Dasbor */
+        .dashboard-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; min-height: 60vh; }
+        .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #F1B4BB; padding-bottom: 10px; }
+        .tabel-dashboard { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+        .tabel-dashboard th, .tabel-dashboard td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
+        .tabel-dashboard th { background-color: #132043; color: white; }
+        .tabel-dashboard tr:hover { background-color: #FDF0F0; }
+        
+        .img-thumb { width: 80px; height: 50px; object-fit: cover; border-radius: 4px; }
+        
+        /* Gaya Tombol Aksi */
+        .btn-aksi { padding: 6px 12px; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: bold; display: inline-block; margin: 2px; text-align: center; color: white; border: none; cursor: pointer;}
+        .btn-verifikasi { background-color: #1F4172; }
+        .btn-edit { background-color: #f39c12; }
+        .btn-hapus { background-color: #e74c3c; }
+        .btn-disabled { background-color: #cccccc; cursor: not-allowed; }
+        
+        .badge-dana { font-weight: bold; }
+        .text-hijau { color: #27ae60; }
+        .text-kuning { color: #f39c12; }
+    </style>
+</head>
+<body class="halaman-home">
+
+    <!-- ===== HEADER ===== -->
+    <header class="home-header">
+        <div class="home-container home-header-inner">
+            <div class="home-logo">
+                <span class="home-logo-icon">♥︎</span>
+                <span class="home-logo-text">Bantu.in</span>
+            </div>
+            <nav class="home-navbar">
+                <a href="index.php" class="home-nav-link">Beranda</a>
+                <a href="dashboard.php" class="home-nav-link aktif">Dasbor Pengelola</a>
+                <span style="color:white; font-size:14px; margin-right:10px;">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
+                <a href="logout.php" class="home-btn-login" style="background-color: #ff4d4d; color: white;">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="dashboard-container">
+        <div class="dashboard-header">
+            <div>
+                <h2>Manajemen Kampanye</h2>
+                <p>Kelola kampanye dan verifikasi donasi yang masuk.</p>
+            </div>
+            <a href="tambah_kampanye.php" class="home-btn-utama">+ Buat Kampanye Baru</a>
+        </div>
+
+        <?php if(isset($_SESSION['pesan'])): ?>
+            <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 20px; border-radius: 5px;">
+                <?= $_SESSION['pesan']; unset($_SESSION['pesan']); ?>
+            </div>
+        <?php endif; ?>
+
+        <div style="overflow-x: auto;">
+            <table class="tabel-dashboard">
+                <thead>
+                    <tr>
+                        <th>Poster</th>
+                        <th>Judul Kampanye</th>
+                        <th>Target Dana</th>
+                        <th>Dana Terkumpul</th>
+                        <th>Dana Pending</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if($result->num_rows > 0): ?>
+                        <?php while($row = $result->fetch_assoc()): ?>
+                            <tr>
+                                <td><img src="<?= htmlspecialchars($row['gambar']) ?>" class="img-thumb" alt="Poster"></td>
+                                <td><strong><?= htmlspecialchars($row['judul']) ?></strong></td>
+                                <td>Rp <?= number_format($row['target_dana'], 0, ',', '.') ?></td>
+                                <td class="badge-dana text-hijau">Rp <?= number_format($row['dana_terkumpul'], 0, ',', '.') ?></td>
+                                <td class="badge-dana text-kuning">Rp <?= number_format($row['dana_pending'], 0, ',', '.') ?></td>
+                                <td>
+                                    <!-- Tombol Verifikasi Donatur -->
+                                    <a href="verifikasi.php?id_kampanye=<?= $row['id'] ?>" class="btn-aksi btn-verifikasi">Verifikasi Donasi</a>
+                                    
+                                    <!-- Tombol Edit -->
+                                    <a href="edit_kampanye.php?id=<?= $row['id'] ?>" class="btn-aksi btn-edit">Edit</a>
+                                    
+                                    <!-- Logika Hapus (Tidak bisa dihapus jika dana terkumpul >= 10.000) -->
+                                    <?php if($row['dana_terkumpul'] >= 10000): ?>
+                                        <button class="btn-aksi btn-disabled" title="Tidak dapat dihapus karena sudah ada dana masuk" disabled>Hapus</button>
+                                    <?php else: ?>
+                                        <a href="hapus_kampanye.php?id=<?= $row['id'] ?>" class="btn-aksi btn-hapus" onclick="return confirm('Yakin ingin menghapus kampanye ini?');">Hapus</a>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="6" style="text-align: center;">Anda belum memiliki kampanye. Mulai buat kampanye baru!</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="home-footer">
+        <div class="home-footer-inner">
+            <div class="home-footer-kolom">
+                <div class="home-logo logo-footer">
+                    <span class="home-logo-icon">♥︎</span>
+                    <span class="home-logo-text">Bantu.in</span>
+                </div>
+                <p><?= htmlspecialchars($info_web['deskripsi'] ?? 'Platform crowdfunding sosial Indonesia.') ?></p>
+            </div>
+            <!-- (Sisa footer disingkat agar kode tidak terlalu panjang, gunakan format footer dinamis yang sama persis dengan index.php) -->
+        </div>
+        <div class="home-footer-bawah">
+            <div class="home-container">
+                <p>&copy; 2026 Bantu.in &mdash; Platform Crowdfunding Sosial Indonesia. Semua Hak Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
