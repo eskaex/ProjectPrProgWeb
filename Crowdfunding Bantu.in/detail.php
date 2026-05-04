@@ -73,6 +73,9 @@ $kategori_label = ucfirst($kampanye['kategori']);
         <nav class="home-navbar">
             <a href="index.php" class="home-nav-link">Beranda</a>
             <a href="index.php#daftar-kampanye" class="home-nav-link">Kampanye</a>
+            <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'penyelenggara'): ?>
+            <a href="dashboard.php" class="home-nav-link" style="color: #1F4172; font-weight: bold;">Dasbor Saya</a>
+            <?php endif; ?>
             <a href="#" class="home-nav-link">Tentang Kami</a>
 
             <?php if (isset($_SESSION['user_id'])): ?>
