@@ -2,7 +2,6 @@
 session_start();
 require 'koneksi.php';
 
-// PROTEKSI HALAMAN: Hanya boleh diakses oleh yang sudah login dan rolenya 'penyelenggara'
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'penyelenggara') {
     header("Location: index.php");
     exit;
@@ -10,8 +9,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'penyelenggara') {
 
 $user_id = $_SESSION['user_id'];
 
-// Kueri untuk mengambil kampanye milik penyelenggara yang sedang login, 
-// beserta total dana VERIFIED (Terkumpul) dan PENDING
+
 $sql = "
     SELECT k.id, k.judul, k.target_dana, k.gambar,
            COALESCE(SUM(CASE WHEN d.status = 'VERIFIED' THEN d.nominal ELSE 0 END), 0) AS dana_terkumpul,
@@ -28,7 +26,7 @@ $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// --- Ambil Data Info Website untuk Footer ---
+
 $sql_info = "SELECT * FROM info_website LIMIT 1";
 $result_info = $conn->query($sql_info);
 $info_web = $result_info->fetch_assoc();
@@ -42,7 +40,7 @@ $info_web = $result_info->fetch_assoc();
     <title>Dasbor Penyelenggara - Bantu.in</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* CSS Tambahan Khusus Dasbor */
+
         .dashboard-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; min-height: 60vh; }
         .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #F1B4BB; padding-bottom: 10px; }
         .tabel-dashboard { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
@@ -52,7 +50,7 @@ $info_web = $result_info->fetch_assoc();
         
         .img-thumb { width: 80px; height: 50px; object-fit: cover; border-radius: 4px; }
         
-        /* Gaya Tombol Aksi */
+
         .btn-aksi { padding: 6px 12px; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: bold; display: inline-block; margin: 2px; text-align: center; color: white; border: none; cursor: pointer;}
         .btn-verifikasi { background-color: #1F4172; }
         .btn-edit { background-color: #f39c12; }
@@ -66,7 +64,7 @@ $info_web = $result_info->fetch_assoc();
 </head>
 <body class="halaman-home">
 
-    <!-- ===== HEADER ===== -->
+
     <header class="home-header">
         <div class="home-container home-header-inner">
             <div class="home-logo">
@@ -82,7 +80,7 @@ $info_web = $result_info->fetch_assoc();
         </div>
     </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
+
     <main class="dashboard-container">
         <div class="dashboard-header">
             <div>
@@ -120,13 +118,13 @@ $info_web = $result_info->fetch_assoc();
                                 <td class="badge-dana text-hijau">Rp <?= number_format($row['dana_terkumpul'], 0, ',', '.') ?></td>
                                 <td class="badge-dana text-kuning">Rp <?= number_format($row['dana_pending'], 0, ',', '.') ?></td>
                                 <td>
-                                    <!-- Tombol Verifikasi Donatur -->
+
                                     <a href="verifikasi.php?id_kampanye=<?= $row['id'] ?>" class="btn-aksi btn-verifikasi">Verifikasi Donasi</a>
                                     
-                                    <!-- Tombol Edit -->
+ 
                                     <a href="edit_kampanye.php?id=<?= $row['id'] ?>" class="btn-aksi btn-edit">Edit</a>
                                     
-                                    <!-- Logika Hapus (Tidak bisa dihapus jika dana terkumpul >= 10.000) -->
+
                                     <?php if($row['dana_terkumpul'] >= 10000): ?>
                                         <button class="btn-aksi btn-disabled" title="Tidak dapat dihapus karena sudah ada dana masuk" disabled>Hapus</button>
                                     <?php else: ?>
@@ -145,7 +143,7 @@ $info_web = $result_info->fetch_assoc();
         </div>
     </main>
 
-    <!-- ===== FOOTER ===== -->
+
     <footer class="home-footer">
         <div class="home-footer-inner">
             <div class="home-footer-kolom">
@@ -155,7 +153,7 @@ $info_web = $result_info->fetch_assoc();
                 </div>
                 <p><?= htmlspecialchars($info_web['deskripsi'] ?? 'Platform crowdfunding sosial Indonesia.') ?></p>
             </div>
-            <!-- (Sisa footer disingkat agar kode tidak terlalu panjang, gunakan format footer dinamis yang sama persis dengan index.php) -->
+
         </div>
         <div class="home-footer-bawah">
             <div class="home-container">

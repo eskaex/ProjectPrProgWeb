@@ -2,7 +2,6 @@
 session_start();
 require 'koneksi.php';
 
-// Proteksi Halaman: Hanya Penyelenggara
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'penyelenggara') {
     header("Location: index.php");
     exit;
@@ -11,7 +10,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'penyelenggara') {
 $user_id = $_SESSION['user_id'];
 $id_kampanye = isset($_GET['id_kampanye']) ? (int)$_GET['id_kampanye'] : 0;
 
-// 1. Validasi Kepemilikan Kampanye
+
 $cek_sql = "SELECT judul FROM kampanye WHERE id = ? AND penyelenggara_id = ?";
 $stmt_cek = $conn->prepare($cek_sql);
 $stmt_cek->bind_param("ii", $id_kampanye, $user_id);
@@ -23,10 +22,9 @@ if ($hasil_cek->num_rows === 0) {
 }
 $kampanye = $hasil_cek->fetch_assoc();
 
-// 2. Proses Aksi Terima / Tolak Donasi
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_donasi = (int)$_POST['id_donasi'];
-    $aksi = $_POST['aksi']; // Isinya 'terima' atau 'tolak'
+    $aksi = $_POST['aksi'];
     
     $status_baru = ($aksi === 'terima') ? 'VERIFIED' : 'REJECTED';
 
@@ -40,12 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['pesan'] = "Error: Gagal mengubah status donasi.";
     }
     
-    // Refresh halaman agar data terbaru muncul
     header("Location: verifikasi.php?id_kampanye=" . $id_kampanye);
     exit;
 }
 
-// 3. Ambil Ringkasan Dana (Terkumpul & Pending)
 $sum_sql = "SELECT 
     COALESCE(SUM(CASE WHEN status = 'VERIFIED' THEN nominal ELSE 0 END), 0) AS dana_terkumpul,
     COALESCE(SUM(CASE WHEN status = 'PENDING' THEN nominal ELSE 0 END), 0) AS dana_pending
@@ -55,7 +51,7 @@ $stmt_sum->bind_param("i", $id_kampanye);
 $stmt_sum->execute();
 $ringkasan = $stmt_sum->get_result()->fetch_assoc();
 
-// 4. Ambil Daftar Semua Donasi untuk Kampanye Ini
+
 $list_sql = "SELECT d.*, u.nama AS nama_donatur 
              FROM donasi d 
              JOIN users u ON d.donatur_id = u.id 
@@ -66,7 +62,6 @@ $stmt_list->bind_param("i", $id_kampanye);
 $stmt_list->execute();
 $daftar_donasi = $stmt_list->get_result();
 
-// Info footer
 $sql_info = "SELECT * FROM info_website LIMIT 1";
 $result_info = $conn->query($sql_info);
 $info_web = $result_info->fetch_assoc();
@@ -104,7 +99,7 @@ $info_web = $result_info->fetch_assoc();
 </head>
 <body class="halaman-home">
 
-    <!-- ===== HEADER ===== -->
+
     <header class="home-header">
         <div class="home-container home-header-inner">
             <a href="index.php" class="home-logo" style="text-decoration:none;">
@@ -131,7 +126,6 @@ $info_web = $result_info->fetch_assoc();
             </div>
         <?php endif; ?>
 
-        <!-- Ringkasan Dana -->
         <div class="info-panel">
             <div class="info-box" style="border-left-color: #27ae60;">
                 <h4>Dana Terkumpul (Verified)</h4>
@@ -143,7 +137,6 @@ $info_web = $result_info->fetch_assoc();
             </div>
         </div>
 
-        <!-- Tabel Daftar Donasi -->
         <div style="overflow-x: auto;">
             <table class="tabel-verifikasi">
                 <thead>
@@ -163,7 +156,6 @@ $info_web = $result_info->fetch_assoc();
                             <tr>
                                 <td><?= date('d/m/Y H:i', strtotime($row['created_at'])) ?></td>
                                 <td>
-                                    <!-- Logika donasi anonim -->
                                     <?= $row['is_anonim'] ? '<i>Hamba Allah</i>' : htmlspecialchars($row['nama_donatur']) ?>
                                     <br><small style="color:#888;">Pesan: <?= htmlspecialchars($row['pesan'] ?: '-') ?></small>
                                 </td>
@@ -182,7 +174,6 @@ $info_web = $result_info->fetch_assoc();
                                     ?>
                                 </td>
                                 <td>
-                                    <!-- Aksi hanya muncul jika status masih PENDING -->
                                     <?php if($row['status'] === 'PENDING'): ?>
                                         <form action="" method="POST" style="display:inline;">
                                             <input type="hidden" name="id_donasi" value="<?= $row['id'] ?>">
@@ -211,7 +202,6 @@ $info_web = $result_info->fetch_assoc();
         </div>
     </main>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <p>&copy; 2026 Bantu.in &mdash; Platform Crowdfunding Sosial Indonesia</p>
     </footer>

@@ -2,17 +2,15 @@
 session_start();
 require 'koneksi.php';
 
-// Konfigurasi Pagination
 $limit = 6;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 
-// Menangkap input pencarian
+
 $search_judul = isset($_GET['judul']) ? $_GET['judul'] : '';
 $search_kategori = isset($_GET['kategori']) ? $_GET['kategori'] : '';
 $search_lokasi = isset($_GET['lokasi']) ? $_GET['lokasi'] : '';
 
-// kampanye yang batas waktunya >= hari ini
 $sql_base = "
     FROM kampanye k
     JOIN users u ON k.penyelenggara_id = u.id
@@ -20,7 +18,6 @@ $sql_base = "
     WHERE k.batas_waktu >= CURDATE()
 ";
 
-// filter pencarian
 $params = [];
 $types = "";
 
@@ -86,7 +83,6 @@ $info_web = $result_info->fetch_assoc();
 </head>
 <body class="halaman-home">
 
-    <!-- ===== HEADER ===== -->
     <header class="home-header">
         <div class="home-container home-header-inner">
             <div class="home-logo">
@@ -111,7 +107,7 @@ $info_web = $result_info->fetch_assoc();
         </div>
     </header>
     
-    <!-- ===== HERO ===== -->
+
     <section class="home-hero">
         <div class="home-container">
             <h1>Bersama Kita Bisa Membantu Sesama</h1>
@@ -120,7 +116,7 @@ $info_web = $result_info->fetch_assoc();
         </div>
     </section>
 
-    <!-- ===== AREA PENCARIAN ===== -->
+
     <section class="home-section-pencarian" id="pencarian">
         <div class="home-container">
             <h2>Cari Kampanye Donasi</h2>
@@ -151,7 +147,6 @@ $info_web = $result_info->fetch_assoc();
         </div>
     </section>
 
-    <!-- ===== DAFTAR KAMPANYE ===== -->
     <section class="home-section-kampanye" id="daftar-kampanye">
         <div class="home-container">
             <h2>Kampanye Aktif Saat Ini</h2>
@@ -190,7 +185,6 @@ $info_web = $result_info->fetch_assoc();
                 <?php endif; ?>
             </div>
 
-            <!-- ===== PAGINATION ===== -->
             <?php if($total_pages > 1): ?>
             <div class="pagination">
                 <?php 
@@ -210,7 +204,6 @@ $info_web = $result_info->fetch_assoc();
         </div>
     </section>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="home-footer">
         <div class="home-footer-inner">
             <div class="home-footer-kolom">
