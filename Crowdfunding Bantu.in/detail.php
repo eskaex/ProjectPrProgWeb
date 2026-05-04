@@ -2,7 +2,7 @@
 session_start();
 require 'koneksi.php';
 
-// Ambil ID kampanye dari URL
+
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if ($id <= 0) {
@@ -10,7 +10,7 @@ if ($id <= 0) {
     exit;
 }
 
-// Ambil data kampanye + nama & email penyelenggara
+
 $stmt = $conn->prepare("
     SELECT k.*, u.nama AS nama_penyelenggara, u.email AS email_penyelenggara
     FROM kampanye k
@@ -26,7 +26,7 @@ if (!$kampanye) {
     exit;
 }
 
-// Hitung dana terkumpul dari donasi VERIFIED
+
 $stmtDana = $conn->prepare("
     SELECT COALESCE(SUM(nominal), 0) AS dana_terkumpul
     FROM donasi
@@ -36,17 +36,17 @@ $stmtDana->bind_param("i", $id);
 $stmtDana->execute();
 $dana_terkumpul = (float)$stmtDana->get_result()->fetch_assoc()['dana_terkumpul'];
 
-// Hitung persentase progress
+
 $target      = (float)$kampanye['target_dana'];
 $persen      = $target > 0 ? min(100, round(($dana_terkumpul / $target) * 100, 1)) : 0;
 
-// Hitung sisa hari
+
 $batas_waktu = new DateTime($kampanye['batas_waktu']);
 $sekarang    = new DateTime();
 $sudah_lewat = $sekarang > $batas_waktu;
 $sisa_hari   = (int)$sekarang->diff($batas_waktu)->days;
 
-// Helper format Rupiah
+
 function formatRupiah($angka) {
     return 'Rp ' . number_format($angka, 0, ',', '.');
 }
@@ -63,7 +63,7 @@ $kategori_label = ucfirst($kampanye['kategori']);
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
+
 <header class="home-header">
     <div class="home-container home-header-inner">
         <a href="index.php" class="home-logo">
@@ -90,13 +90,13 @@ $kategori_label = ucfirst($kampanye['kategori']);
     </div>
 </header>
 
-<!-- ===== MAIN ===== -->
+
 <main class="container">
     <a href="index.php" class="btn btn-backhome">&laquo; Kembali ke Utama</a>
 
     <section class="detail-layout">
 
-        <!-- KOLOM KIRI: Konten Kampanye -->
+
         <article class="col-main">
             <img
                 src="<?= htmlspecialchars($kampanye['gambar']) ?>"
@@ -117,10 +117,10 @@ $kategori_label = ucfirst($kampanye['kategori']);
             <p class="deskripsi"><?= nl2br(htmlspecialchars($kampanye['deskripsi'])) ?></p>
         </article>
 
-        <!-- KOLOM KANAN: Sidebar Donasi -->
+
         <article class="col-sidebar">
 
-            <!-- Info Penyelenggara -->
+
             <div class="organizer-info">
                 <p>Penyelenggara Kampanye</p>
                 <p><strong><?= htmlspecialchars($kampanye['nama_penyelenggara']) ?></strong></p>
@@ -129,7 +129,7 @@ $kategori_label = ucfirst($kampanye['kategori']);
 
             <hr>
 
-            <!-- Info Dana -->
+
             <h3>Informasi Donasi</h3>
 
             <p>
@@ -141,7 +141,7 @@ $kategori_label = ucfirst($kampanye['kategori']);
                 <span class="dana-badge"><?= formatRupiah($dana_terkumpul) ?></span>
             </p>
 
-            <!-- Progress Bar -->
+
             <div class="progress-container">
                 <div class="progress-bar" style="width: <?= $persen ?>%;">
                     <?= $persen ?>%
@@ -149,7 +149,7 @@ $kategori_label = ucfirst($kampanye['kategori']);
             </div>
             <small style="color:#555;"><?= $persen ?>% dari target tercapai</small>
 
-            <!-- Batas Waktu -->
+
             <p style="margin-top:12px;">
                 <strong>Batas Waktu:</strong>
                 <?= $batas_waktu->format('d F Y') ?>
@@ -160,7 +160,7 @@ $kategori_label = ucfirst($kampanye['kategori']);
                 <?php endif; ?>
             </p>
 
-            <!-- Info Rekening -->
+
             <?php if (!empty($kampanye['nama_bank'])): ?>
             <div class="rekening-info" style="margin-top:12px; padding:12px; background:#f5f5f5; border-radius:8px;">
                 <p style="margin:0 0 6px;"><strong>Informasi Rekening</strong></p>
@@ -170,7 +170,7 @@ $kategori_label = ucfirst($kampanye['kategori']);
             </div>
             <?php endif; ?>
 
-            <!-- Tombol Donasi -->
+
             <?php if (!$sudah_lewat): ?>
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <a href="donasi.php?id=<?= $id ?>" class="btn btn-donasi">Donasi Sekarang</a>

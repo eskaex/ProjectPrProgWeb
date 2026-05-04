@@ -2,9 +2,9 @@
 session_start();
 require 'koneksi.php';
 
-// 1. CEK LOGIN: Jika belum login, lempar ke halaman login
+
 if (!isset($_SESSION['user_id'])) {
-    // Menyimpan URL kampanye agar setelah login bisa dikembalikan ke sini
+
     $_SESSION['redirect_url'] = "donasi.php?id=" . ($_GET['id'] ?? 0);
     header("Location: login.php");
     exit;
@@ -13,20 +13,20 @@ if (!isset($_SESSION['user_id'])) {
 $donatur_id = $_SESSION['user_id'];
 $id_kampanye = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-// 2. PROSES FORM KETIKA DI-SUBMIT
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nominal = (float)$_POST['nominal'];
     $pesan = htmlspecialchars($_POST['pesan']);
     $metode_pembayaran = $_POST['metode_pembayaran'];
     $is_anonim = isset($_POST['anonim']) ? 1 : 0;
 
-    // Validasi Nominal Minimal Rp 10.000
+
     if ($nominal < 10000) {
         $error_msg = "Minimal donasi adalah Rp 10.000";
     } elseif (empty($metode_pembayaran)) {
         $error_msg = "Silakan pilih metode pembayaran";
     } else {
-        // Validasi dan Upload Bukti Transfer
+
         if (isset($_FILES['bukti_transfer']) && $_FILES['bukti_transfer']['error'] === 0) {
             $file_tmp = $_FILES['bukti_transfer']['tmp_name'];
             $file_name = $_FILES['bukti_transfer']['name'];
@@ -34,12 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $allowed_ext = ['jpg', 'jpeg', 'png'];
 
             if (in_array($file_ext, $allowed_ext)) {
-                // Buat nama file unik agar tidak bentrok, lalu simpan ke folder gambar/
+
                 $new_file_name = "bukti_" . time() . "_" . rand(100,999) . "." . $file_ext;
                 $upload_path = "gambar/" . $new_file_name;
 
                 if (move_uploaded_file($file_tmp, $upload_path)) {
-                    // Masukkan ke Database dengan status PENDING
+
                     $sql_insert = "INSERT INTO donasi (kampanye_id, donatur_id, nominal, pesan, bukti_transfer, status, is_anonim, metode_pembayaran) 
                                    VALUES (?, ?, ?, ?, ?, 'PENDING', ?, ?)";
                     $stmt_in = $conn->prepare($sql_insert);
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// 3. AMBIL DATA KAMPANYE DARI DB (Untuk Ringkasan)
+
 $sql_kampanye = "
     SELECT k.*, u.nama AS nama_penyelenggara,
            COALESCE(SUM(CASE WHEN d.status = 'VERIFIED' THEN d.nominal ELSE 0 END), 0) AS dana_terkumpul
@@ -93,20 +93,20 @@ if ($persentase > 100) $persentase = 100;
     <title>Donasi - <?= htmlspecialchars($kampanye['judul']) ?></title>
     <link rel="stylesheet" href="style.css">
     <script>
-        // Script untuk mengatur pilihan metode pembayaran
+
         function pilihBayar(elemen, metode) {
-            // Hapus kelas terpilih dari semua pilihan
+
             let pilihan = document.querySelectorAll('.don-pilihan-bayar');
             pilihan.forEach(p => p.classList.remove('terpilih'));
             
-            // Tambahkan ke yang diklik
+
             elemen.classList.add('terpilih');
             
-            // Set value ke hidden input form
+
             document.getElementById('input_metode').value = metode;
         }
 
-        // Script hitung total live (optional UI enhancement)
+
         function hitung() {
             let nominal = document.getElementById('nominal').value;
             let n = parseInt(nominal) || 0;
@@ -140,7 +140,7 @@ if ($persentase > 100) $persentase = 100;
         </div>
         
         <div class="don-tata-letak">
-            <!-- Sisi Kiri: Ringkasan Kampanye -->
+
             <div class="don-kartu">
                 <img src="<?= htmlspecialchars($kampanye['gambar']) ?>" alt="Poster" class="don-kartu-gambar">
                 <div class="don-kartu-isi">
@@ -165,11 +165,11 @@ if ($persentase > 100) $persentase = 100;
                 </div>
             </div>
 
-            <!-- Sisi Kanan: Form Transaksi -->
+
             <div class="don-panel">
                 <h3 class="don-panel-judul">Formulir Donasi</h3>
 
-                <!-- Notifikasi Pesan Sukses / Error -->
+
                 <?php if(isset($error_msg)): ?>
                     <div style="background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
                         <?= $error_msg ?>
@@ -181,17 +181,17 @@ if ($persentase > 100) $persentase = 100;
                     </div>
                 <?php endif; ?>
 
-                <!-- Form dimulai di sini, butuh enctype="multipart/form-data" untuk upload file -->
+
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="don-kelompok">
                         <label class="don-keterangan-input">Nama Lengkap</label>
-                        <!-- Mengambil data nama dari session (Readonly agar tidak diubah) -->
+
                         <input class="don-masukan" type="text" value="<?= htmlspecialchars($_SESSION['nama'] ?? '') ?>" readonly style="background-color: #e9ecef;">
                     </div>
 
                     <div class="don-kelompok">
                         <label class="don-keterangan-input">Email</label>
-                        <!-- Mengambil data email dari session -->
+
                         <input class="don-masukan" type="email" value="<?= htmlspecialchars($_SESSION['email'] ?? 'email@anda.com') ?>" readonly style="background-color: #e9ecef;">
                     </div>
 
@@ -233,7 +233,7 @@ if ($persentase > 100) $persentase = 100;
                                 <span class="don-ikon-bayar">📱</span>E-Wallet
                             </div>
                         </div>
-                        <!-- Input tersembunyi yang nilainya diubah oleh JavaScript saat kotak dipilih -->
+
                         <input type="hidden" name="metode_pembayaran" id="input_metode" required>
                     </div>
 

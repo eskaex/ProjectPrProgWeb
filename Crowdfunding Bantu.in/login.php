@@ -1,15 +1,15 @@
 <?php
 session_start();
-require 'koneksi.php'; // Memanggil koneksi database
+require 'koneksi.php';
 
 $error = "";
 
-// Jika form disubmit
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
-    $password = $_POST['password']; // Enkripsi MD5 sesuai database
+    $password = $_POST['password'];
 
-    // Cek user di database
+
     $query = "SELECT * FROM users WHERE username = ? AND password = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("ss", $username, $password);
@@ -19,12 +19,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
         
-        // Simpan data ke session
+
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['nama']    = $user['nama'];
         $_SESSION['role']    = $user['role'];
 
-        // Arahkan ke halaman utama
+
         header("Location: index.php");
         exit;
     } else {
@@ -65,12 +65,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p class="login-sub">Masuk ke akun Bantu.in kamu</p>
             </div>
 
-            <!-- Tampilkan error jika login gagal -->
+
             <?php if(!empty($error)): ?>
                 <p style="color: red; text-align: center; margin-bottom: 15px; font-weight: bold;"><?= $error ?></p>
             <?php endif; ?>
 
-            <!-- Action kosong agar diproses di file ini sendiri -->
+
             <form action="" method="POST">
                 <div class="login-field">
                     <label for="username">Username</label>
