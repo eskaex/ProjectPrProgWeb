@@ -52,7 +52,7 @@ $info_web = $result_info->fetch_assoc();
         
 
         .btn-aksi { padding: 6px 12px; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: bold; display: inline-block; margin: 2px; text-align: center; color: white; border: none; cursor: pointer;}
-        .btn-verifikasi { background-color: #1F4172; }
+        .btn-verifikasi { background-color: #27ae60; }
         .btn-edit { background-color: #f39c12; }
         .btn-hapus { background-color: #e74c3c; }
         .btn-disabled { background-color: #cccccc; cursor: not-allowed; }
