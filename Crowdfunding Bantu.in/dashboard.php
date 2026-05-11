@@ -122,7 +122,7 @@ $info_web = $result_info->fetch_assoc();
                                     <a href="verifikasi.php?id_kampanye=<?= $row['id'] ?>" class="btn-aksi btn-verifikasi">Verifikasi Donasi</a>
                                     
  
-                                    <a href="edit_kampanye.php?id=<?= $row['id'] ?>" class="btn-aksi btn-edit">Edit</a>
+                                    <a href="editKampanye.php?id=<?= $row['id'] ?>" class="btn-aksi btn-edit">Edit</a>
                                     
 
                                     <?php if($row['dana_terkumpul'] >= 10000): ?>
