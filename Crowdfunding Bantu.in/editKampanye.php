@@ -95,6 +95,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .img-preview { width: 150px; height: auto; border-radius: 6px; margin-top: 10px; border: 1px solid #ccc; }
         .btn-simpan { background-color: #132043; color: white; padding: 12px 20px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; margin-top: 10px; }
         .btn-simpan:hover { background-color: #1F4172; }
+        .btn-kembali {
+            display: inline-block;
+            background-color: #1F4172; 
+            color: #ffffff !important; 
+            border: none; 
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .btn-kembali:hover {
+            background-color: #F1B4BB;
+        }
     </style>
 </head>
 <body class="halaman-home">
@@ -106,14 +122,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <span class="home-logo-text">Bantu.in</span>
             </a>
             <nav class="home-navbar">
-                <a href="dashboard.php" class="home-nav-link aktif">Kembali ke Dasbor</a>
+                <span style="color:white; font-size:14px; margin-right:10px;">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
             </nav>
         </div>
     </header>
 
     <main class="container">
         <div class="form-container">
-            <h2 class="form-title">Edit Kampanye</h2>
+            <a href="dashboard.php" class="btn-kembali">&laquo; Kembali ke Dashboard</a>
+
+            <h2 class="form-title" style="margin-top: 0;">Edit Kampanye</h2>
 
             <?php if(isset($error_msg)): ?>
                 <div style="background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 20px; border-radius: 5px;">

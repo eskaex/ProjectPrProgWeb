@@ -2,7 +2,7 @@
 session_start();
 require 'koneksi.php';
 
-$limit = 6;
+$limit = 5;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 
@@ -93,7 +93,7 @@ $info_web = $result_info->fetch_assoc();
                 <a href="index.php" class="home-nav-link aktif">Beranda</a>
                 <a href="#daftar-kampanye" class="home-nav-link">Kampanye</a>
                 <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'penyelenggara'): ?>
-                <a href="dashboard.php" class="home-nav-link" style="color: #1F4172; font-weight: bold;">Dasbor Saya</a>
+                <a href="dashboard.php" class="home-nav-link">Dashboard Saya</a>
                 <?php endif; ?>
                 <a href="#" class="home-nav-link">Tentang Kami</a>
                 
@@ -155,12 +155,11 @@ $info_web = $result_info->fetch_assoc();
                 <?php if($result->num_rows > 0): ?>
                     <?php while($row = $result->fetch_assoc()): ?>
                         <div class="home-card-kampanye">
-                            <img src="<?= htmlspecialchars($row['gambar']) ?>" alt="Poster Kampanye" class="home-card-poster">
+                            <img src="<?= htmlspecialchars($row['gambar']) ?>" alt="Poster" class="home-card-poster">
                             <div class="home-card-isi">
                                 <span class="home-badge home-badge-<?= htmlspecialchars($row['kategori']) ?>"><?= ucfirst(htmlspecialchars($row['kategori'])) ?></span>
                                 <h3 class="home-card-judul"><?= htmlspecialchars($row['judul']) ?></h3>
                                 <p class="home-card-penyelenggara">🏢 Penyelenggara: <strong><?= htmlspecialchars($row['nama_penyelenggara']) ?></strong></p>
-                                
                                 
                                 <table class="home-card-info" style="margin-top:15px;">
                                     <tr>
@@ -186,15 +185,17 @@ $info_web = $result_info->fetch_assoc();
             </div>
 
             <?php if($total_pages > 1): ?>
-            <div class="pagination">
+            <div class="pagination" style="display: flex; justify-content: center; gap: 10px; margin-top: 40px;">
                 <?php 
-                $query_string = "";
-                if(!empty($search_judul)) $query_string .= "&judul=$search_judul";
-                if(!empty($search_kategori)) $query_string .= "&kategori=$search_kategori";
-                if(!empty($search_lokasi)) $query_string .= "&lokasi=$search_lokasi";
+                $query_params = $_GET;
                 
-                for($i = 1; $i <= $total_pages; $i++): ?>
-                    <a href="index.php?page=<?= $i ?><?= $query_string ?>" class="page-link <?= ($i == $page) ? 'active' : '' ?>">
+                for($i = 1; $i <= $total_pages; $i++): 
+                    $query_params['page'] = $i;
+                    $link = "index.php?" . http_build_query($query_params);
+                ?>
+                    <a href="<?= $link ?>" class="page-link" 
+                       style="padding: 8px 16px; border-radius: 5px; text-decoration: none; 
+                              <?= ($i == $page) ? 'background-color: #F1B4BB; color: #132043; font-weight: bold;' : 'background-color: #132043; color: white;' ?>">
                         <?= $i ?>
                     </a>
                 <?php endfor; ?>

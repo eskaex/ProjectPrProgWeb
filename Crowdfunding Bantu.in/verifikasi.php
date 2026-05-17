@@ -44,7 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $sum_sql = "SELECT 
     COALESCE(SUM(CASE WHEN status = 'VERIFIED' THEN nominal ELSE 0 END), 0) AS dana_terkumpul,
-    COALESCE(SUM(CASE WHEN status = 'PENDING' THEN nominal ELSE 0 END), 0) AS dana_pending
+    COUNT(CASE WHEN status = 'VERIFIED' THEN 1 END) AS jumlah_terkumpul,
+    COALESCE(SUM(CASE WHEN status = 'PENDING' THEN nominal ELSE 0 END), 0) AS dana_pending,
+    COUNT(CASE WHEN status = 'PENDING' THEN 1 END) AS jumlah_pending,
+    COALESCE(SUM(CASE WHEN status = 'REJECTED' THEN nominal ELSE 0 END), 0) AS dana_ditolak,
+    COUNT(CASE WHEN status = 'REJECTED' THEN 1 END) AS jumlah_ditolak
     FROM donasi WHERE kampanye_id = ?";
 $stmt_sum = $conn->prepare($sum_sql);
 $stmt_sum->bind_param("i", $id_kampanye);
@@ -95,6 +99,22 @@ $info_web = $result_info->fetch_assoc();
         .btn-tolak { background-color: #e74c3c; }
         .btn-aksi:hover { opacity: 0.8; }
         .bukti-img { width: 60px; height: auto; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; }
+        .btn-kembali {
+            display: inline-block;
+            background-color: #1F4172; 
+            color: #ffffff !important; 
+            border: none; 
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .btn-kembali:hover {
+            background-color: #F1B4BB;
+        }
     </style>
 </head>
 <body class="halaman-home">
@@ -116,7 +136,7 @@ $info_web = $result_info->fetch_assoc();
     </header>
 
     <main class="verifikasi-container">
-        <a href="dashboard.php" style="color: #1F4172; font-weight: bold; text-decoration: none;">&laquo; Kembali ke Dasbor</a>
+        <a href="dashboard.php" class="btn-kembali">&laquo; Kembali ke Dashboard</a>
         
         <h2 style="margin-top: 20px;">Verifikasi Donasi: <?= htmlspecialchars($kampanye['judul']) ?></h2>
         
@@ -128,12 +148,27 @@ $info_web = $result_info->fetch_assoc();
 
         <div class="info-panel">
             <div class="info-box" style="border-left-color: #27ae60;">
-                <h4>Dana Terkumpul (Verified)</h4>
+                <h4>Dana Terkumpul</h4>
                 <div class="nilai text-hijau">Rp <?= number_format($ringkasan['dana_terkumpul'], 0, ',', '.') ?></div>
+                <div style="font-size: 13px; color: #666; margin-top: 5px;">
+                    ✅ <?= $ringkasan['jumlah_terkumpul'] ?> donasi diterima
+                </div>
             </div>
+            
             <div class="info-box" style="border-left-color: #f39c12;">
-                <h4>Dana Menunggu (Pending)</h4>
+                <h4>Dana Menunggu</h4>
                 <div class="nilai text-kuning">Rp <?= number_format($ringkasan['dana_pending'], 0, ',', '.') ?></div>
+                <div style="font-size: 13px; color: #666; margin-top: 5px;">
+                    ⏳ <?= $ringkasan['jumlah_pending'] ?> donasi pending
+                </div>
+            </div>
+
+            <div class="info-box" style="border-left-color: #e74c3c;">
+                <h4>Dana Ditolak</h4>
+                <div class="nilai" style="color: #e74c3c;">Rp <?= number_format($ringkasan['dana_ditolak'], 0, ',', '.') ?></div>
+                <div style="font-size: 13px; color: #666; margin-top: 5px;">
+                    ❌ <?= $ringkasan['jumlah_ditolak'] ?> donasi ditolak
+                </div>
             </div>
         </div>
 
