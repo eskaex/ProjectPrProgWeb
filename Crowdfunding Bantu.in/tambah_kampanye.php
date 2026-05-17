@@ -71,17 +71,15 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buat Kampanye Baru - Bantu.in</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Menggunakan font Google Poppins untuk tampilan lebih modern -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #FDF0F0; /* Background lembut senada dengan tema */
+            background-color: #FDF0F0;
             margin: 0;
             color: #333;
         }
 
-        /* Navbar Header Standar Bantu.in */
         .header-top {
             background-color: #132043;
             padding: 15px 0;
@@ -105,7 +103,6 @@ if (isset($_POST['submit'])) {
         }
         .logo-icon { color: #F1B4BB; }
 
-        /* Container Form */
         .main-wrapper {
             padding: 40px 20px;
             min-height: calc(100vh - 150px);
@@ -133,7 +130,6 @@ if (isset($_POST['submit'])) {
             font-size: 14px;
         }
 
-        /* Styling Input */
         .form-group { margin-bottom: 20px; }
         .form-group label { 
             display: block; 
@@ -163,7 +159,6 @@ if (isset($_POST['submit'])) {
             box-shadow: 0 0 0 3px rgba(31, 65, 114, 0.1);
         }
         
-        /* Input File Custom */
         .form-group input[type="file"] {
             width: 100%;
             padding: 10px;
@@ -173,7 +168,6 @@ if (isset($_POST['submit'])) {
             cursor: pointer;
         }
 
-        /* Tombol */
         .btn-simpan { 
             background-color: #132043; 
             color: white; 
@@ -190,20 +184,7 @@ if (isset($_POST['submit'])) {
         }
         .btn-simpan:hover { background-color: #1F4172; }
         .btn-simpan:active { transform: scale(0.98); }
-        
-        .btn-batal {
-            display: block; 
-            text-align: center; 
-            margin-top: 15px; 
-            text-decoration: none; 
-            color: #888;
-            font-weight: 600;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-        .btn-batal:hover { color: #e74c3c; }
 
-        /* Pesan Error */
         .error-msg { 
             color: #721c24; 
             background-color: #f8d7da; 
@@ -212,6 +193,23 @@ if (isset($_POST['submit'])) {
             margin-bottom: 20px; 
             border-left: 5px solid #f5c6cb;
             font-size: 14px;
+        }
+
+        .btn-kembali {
+            display: inline-block;
+            background-color: #1F4172; 
+            color: #ffffff !important; 
+            border: none; 
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .btn-kembali:hover {
+            background-color: #F1B4BB;
         }
     </style>
 </head>
@@ -229,8 +227,9 @@ if (isset($_POST['submit'])) {
     <!-- Konten Utama -->
     <div class="main-wrapper">
         <div class="form-container">
-            <div class="form-header">
-                <h2>Buat Kampanye Baru</h2>
+            <a href="dashboard.php" class="btn-kembali">&laquo; Kembali ke Dasbor</a>
+            <div class="form-header" style="text-align: left;">
+                <h2 style="margin-top: 0;">Buat Kampanye Baru</h2>
                 <p>Isi detail di bawah ini untuk memulai penggalangan dana kebaikan Anda.</p>
             </div>
 
@@ -261,7 +260,6 @@ if (isset($_POST['submit'])) {
                 </div>
 
                 <button type="submit" name="submit" class="btn-simpan">Publikasikan Kampanye</button>
-                <a href="dashboard.php" class="btn-batal">← Batal & Kembali ke Dasbor</a>
             </form>
         </div>
     </div>

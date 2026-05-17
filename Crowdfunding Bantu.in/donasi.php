@@ -5,13 +5,26 @@ require 'koneksi.php';
 
 if (!isset($_SESSION['user_id'])) {
 
-    $_SESSION['redirect_url'] = "donasi.php?id=" . ($_GET['id'] ?? 0);
+    $_SESSION['redirect_url'] = "donasi.php?id=" . (int)($_GET['id'] ?? 0);
     header("Location: login.php");
     exit;
 }
 
-$donatur_id = $_SESSION['user_id'];
+$user_id = $_SESSION['user_id'];
 $id_kampanye = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+if ($id_kampanye === 0) {
+    die("Error: ID Kampanye tidak ditemukan di URL.");
+}
+
+$query_user = "SELECT email FROM users WHERE id = ?";
+$stmt_user = $conn->prepare($query_user);
+$stmt_user->bind_param("i", $user_id);
+$stmt_user->execute();
+$hasil_user = $stmt_user->get_result();
+$data_user = $hasil_user->fetch_assoc();
+
+$email_db = $data_user['email'] ?? '';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -43,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $sql_insert = "INSERT INTO donasi (kampanye_id, donatur_id, nominal, pesan, bukti_transfer, status, is_anonim, metode_pembayaran) 
                                    VALUES (?, ?, ?, ?, ?, 'PENDING', ?, ?)";
                     $stmt_in = $conn->prepare($sql_insert);
-                    $stmt_in->bind_param("iidssis", $id_kampanye, $donatur_id, $nominal, $pesan, $upload_path, $is_anonim, $metode_pembayaran);
+                    $stmt_in->bind_param("iidssis", $id_kampanye, $user_id, $nominal, $pesan, $upload_path, $is_anonim, $metode_pembayaran);
                     
                     if ($stmt_in->execute()) {
                         $success_msg = "Terima kasih! Donasi Anda berhasil disubmit dan sedang menunggu verifikasi (PENDING).";
@@ -192,7 +205,14 @@ if ($persentase > 100) $persentase = 100;
                     <div class="don-kelompok">
                         <label class="don-keterangan-input">Email</label>
 
-                        <input class="don-masukan" type="email" value="<?= htmlspecialchars($_SESSION['email'] ?? 'email@anda.com') ?>" readonly style="background-color: #e9ecef;">
+                        <input 
+                            type="email" 
+                            name="email" 
+                            class="don-masukan" 
+                            value="<?= htmlspecialchars($email_db) ?>" 
+                            readonly 
+                            style="background-color: #e9ecef; cursor: not-allowed;"
+                        >
                     </div>
 
                     <div class="don-kelompok">
@@ -238,9 +258,9 @@ if ($persentase > 100) $persentase = 100;
                     </div>
 
                     <hr class="don-pemisah">
-                    <div class="don-baris-ringkasan don-total">
+                    <!-- <div class="don-baris-ringkasan don-total">
                         <span>Total Pembayaran</span><span id="r-total">Rp 0</span>
-                    </div>
+                    </div> -->
 
                     <button type="submit" class="don-tombol-kirim">Donasi Sekarang →</button>
                 </form>
