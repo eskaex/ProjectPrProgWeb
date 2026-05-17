@@ -12,8 +12,15 @@ $user_id = $_SESSION['user_id'];
 if (isset($_POST['submit'])) {
     
     $judul = mysqli_real_escape_string($conn, trim($_POST['judul']));
+    $kategori = mysqli_real_escape_string($conn, trim($_POST['kategori']));
+    $lokasi = mysqli_real_escape_string($conn, trim($_POST['lokasi']));
     $deskripsi = mysqli_real_escape_string($conn, trim($_POST['deskripsi']));
     $target_dana = (int)$_POST['target_dana'];
+    $batas_waktu = $_POST['batas_waktu'];
+    
+    $nama_bank = mysqli_real_escape_string($conn, trim($_POST['nama_bank']));
+    $no_rekening = mysqli_real_escape_string($conn, trim($_POST['no_rekening']));
+    $atas_nama = mysqli_real_escape_string($conn, trim($_POST['atas_nama']));
     
     $nama_gambar = $_FILES['gambar']['name'];
     $tmp_name = $_FILES['gambar']['tmp_name'];
@@ -39,15 +46,18 @@ if (isset($_POST['submit'])) {
         else {
             
             $nama_gambar_baru = uniqid('poster_', true) . '.' . $ekstensi_file;
-            $folder_tujuan = 'img/' . $nama_gambar_baru;
+            $folder_tujuan = 'gambar/' . $nama_gambar_baru;
 
             if (move_uploaded_file($tmp_name, $folder_tujuan)) {
                 
-                $sql = "INSERT INTO kampanye (penyelenggara_id, judul, deskripsi, target_dana, gambar, created_at) 
-                        VALUES (?, ?, ?, ?, ?, NOW())";
+                $sql = "INSERT INTO kampanye (penyelenggara_id, judul, kategori, lokasi, deskripsi, target_dana, batas_waktu, gambar, nama_bank, no_rekening, atas_nama, created_at) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
                 
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("issis", $user_id, $judul, $deskripsi, $target_dana, $folder_tujuan);
+                $stmt->bind_param("issssisssss", 
+                    $user_id, $judul, $kategori, $lokasi, $deskripsi, $target_dana, $batas_waktu, 
+                    $folder_tujuan, $nama_bank, $no_rekening, $atas_nama
+                );
 
                 if ($stmt->execute()) {
                     $_SESSION['pesan'] = "Kampanye berhasil dibuat!";
@@ -108,7 +118,7 @@ if (isset($_POST['submit'])) {
             min-height: calc(100vh - 150px);
         }
         .form-container { 
-            max-width: 600px; 
+            max-width: 700px; 
             margin: 0 auto; 
             padding: 40px; 
             background: white; 
@@ -116,7 +126,7 @@ if (isset($_POST['submit'])) {
             box-shadow: 0 8px 30px rgba(0,0,0,0.05); 
         }
         .form-header {
-            text-align: center;
+            text-align: left;
             margin-bottom: 30px;
         }
         .form-header h2 {
@@ -138,8 +148,11 @@ if (isset($_POST['submit'])) {
             color: #132043;
             font-size: 14px;
         }
+        
         .form-group input[type="text"], 
         .form-group input[type="number"], 
+        .form-group input[type="date"], 
+        .form-group select,
         .form-group textarea { 
             width: 100%; 
             padding: 12px 15px; 
@@ -152,6 +165,7 @@ if (isset($_POST['submit'])) {
             background-color: #f9f9f9;
         }
         .form-group input:focus, 
+        .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: #1F4172;
@@ -180,7 +194,7 @@ if (isset($_POST['submit'])) {
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
             transition: background-color 0.3s ease, transform 0.1s ease; 
-            margin-top: 10px;
+            margin-top: 20px;
         }
         .btn-simpan:hover { background-color: #1F4172; }
         .btn-simpan:active { transform: scale(0.98); }
@@ -209,13 +223,12 @@ if (isset($_POST['submit'])) {
             transition: all 0.3s ease;
         }
         .btn-kembali:hover {
-            background-color: #F1B4BB;
+            background-color: #132043;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Simpel -->
     <header class="header-top">
         <div class="header-container">
             <a href="dashboard.php" class="logo-text">
@@ -224,11 +237,10 @@ if (isset($_POST['submit'])) {
         </div>
     </header>
 
-    <!-- Konten Utama -->
     <div class="main-wrapper">
         <div class="form-container">
             <a href="dashboard.php" class="btn-kembali">&laquo; Kembali ke Dasbor</a>
-            <div class="form-header" style="text-align: left;">
+            <div class="form-header">
                 <h2 style="margin-top: 0;">Buat Kampanye Baru</h2>
                 <p>Isi detail di bawah ini untuk memulai penggalangan dana kebaikan Anda.</p>
             </div>
@@ -238,15 +250,58 @@ if (isset($_POST['submit'])) {
             <?php endif; ?>
 
             <form action="" method="POST" enctype="multipart/form-data">
+                
                 <div class="form-group">
                     <label>Judul Kampanye</label>
                     <input type="text" name="judul" placeholder="Contoh: Bantuan Sembako Lansia di Desa X" required>
                 </div>
 
                 <div class="form-group">
+                    <label>Kategori</label>
+                    <select name="kategori" required>
+                        <option value="">-- Pilih Kategori --</option>
+                        <option value="bencana">Bencana Alam</option>
+                        <option value="pendidikan">Pendidikan</option>
+                        <option value="kesehatan">Kesehatan</option>
+                        <option value="lingkungan">Lingkungan</option>
+                        <option value="sosial">Sosial</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Lokasi</label>
+                    <input type="text" name="lokasi" placeholder="Contoh: Demak, Jawa Tengah" required>
+                </div>
+
+                <div class="form-group">
                     <label>Target Dana (Rp)</label>
                     <input type="number" name="target_dana" min="10000" placeholder="Contoh: 5000000" required>
                 </div>
+
+                <div class="form-group">
+                    <label>Batas Waktu Kampanye</label>
+                    <input type="date" name="batas_waktu" required>
+                </div>
+
+                <hr style="margin: 30px 0; border: 1px solid #eee;">
+                <h3 style="color: #132043; margin-bottom: 20px;">Informasi Rekening Pencairan</h3>
+                
+                <div class="form-group">
+                    <label>Nama Bank (Cth: BCA, Mandiri, BRI)</label>
+                    <input type="text" name="nama_bank" placeholder="Contoh: BCA" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Nomor Rekening</label>
+                    <input type="text" name="no_rekening" placeholder="Contoh: 1234567890" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Atas Nama</label>
+                    <input type="text" name="atas_nama" placeholder="Contoh: Yayasan Bantu Sesama" required>
+                </div>
+                
+                <hr style="margin: 30px 0; border: 1px solid #eee;">
 
                 <div class="form-group">
                     <label>Deskripsi Lengkap</label>
