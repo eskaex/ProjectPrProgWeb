@@ -21,11 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
 
         $_SESSION['user_id'] = $user['id'];
-        $_SESSION['nama']    = $user['nama'];
-        $_SESSION['role']    = $user['role'];
-
-
-        header("Location: index.php");
+        $_SESSION['nama'] = $user['nama'];
+        $_SESSION['role'] = $user['role'];
+        $redirect = isset($_SESSION['redirect_url']) ? $_SESSION['redirect_url'] : 'index.php';
+        unset($_SESSION['redirect_url']);
+        header("Location: " . $redirect);
         exit;
     } else {
         $error = "Username atau password salah!";
