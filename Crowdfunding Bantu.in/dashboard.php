@@ -39,31 +39,8 @@ $info_web = $result_info->fetch_assoc();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dasbor Penyelenggara - Bantu.in</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-
-        .dashboard-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; min-height: 60vh; }
-        .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #F1B4BB; padding-bottom: 10px; }
-        .tabel-dashboard { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
-        .tabel-dashboard th, .tabel-dashboard td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
-        .tabel-dashboard th { background-color: #132043; color: white; }
-        .tabel-dashboard tr:hover { background-color: #FDF0F0; }
-        
-        .img-thumb { width: 80px; height: 50px; object-fit: cover; border-radius: 4px; }
-        
-
-        .btn-aksi { padding: 6px 12px; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: bold; display: inline-block; margin: 2px; text-align: center; color: white; border: none; cursor: pointer;}
-        .btn-verifikasi { background-color: #27ae60; }
-        .btn-edit { background-color: #f39c12; }
-        .btn-hapus { background-color: #e74c3c; }
-        .btn-disabled { background-color: #cccccc; cursor: not-allowed; }
-        
-        .badge-dana { font-weight: bold; }
-        .text-hijau { color: #27ae60; }
-        .text-kuning { color: #f39c12; }
-    </style>
 </head>
 <body class="halaman-home">
-
 
     <header class="home-header">
         <div class="home-container home-header-inner">

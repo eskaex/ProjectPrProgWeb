@@ -1106,3 +1106,337 @@ button#login:active {
     background: #e89aa3;
     color: #132043;
 }
+
+
+/* ================================================
+   BAGIAN DASBOR PENYELENGGARA
+================================================ */
+
+.dashboard-container { 
+    max-width: 1200px; 
+    margin: 40px auto; 
+    padding: 0 20px; 
+    min-height: 60vh; 
+}
+
+.dashboard-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 20px; 
+    border-bottom: 2px solid #F1B4BB; 
+    padding-bottom: 10px; 
+}
+
+/* Tabel Dasbor */
+.tabel-dashboard { 
+    width: 100%; 
+    border-collapse: collapse; 
+    background: white; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+    border-radius: 8px; 
+    overflow: hidden; 
+}
+
+.tabel-dashboard th, 
+.tabel-dashboard td { 
+    padding: 15px; 
+    text-align: left; 
+    border-bottom: 1px solid #eee; 
+}
+
+.tabel-dashboard th { 
+    background-color: #132043; 
+    color: white; 
+}
+
+.tabel-dashboard tr:hover { 
+    background-color: #FDF0F0; 
+}
+
+/* Gambar Poster di Tabel */
+.img-thumb { 
+    width: 80px; 
+    height: 50px; 
+    object-fit: cover; 
+    border-radius: 4px; 
+}
+
+/* Tombol Aksi */
+.btn-aksi { 
+    padding: 6px 12px; 
+    text-decoration: none; 
+    border-radius: 4px; 
+    font-size: 13px; 
+    font-weight: bold; 
+    display: inline-block; 
+    margin: 2px; 
+    text-align: center; 
+    color: white; 
+    border: none; 
+    cursor: pointer;
+}
+
+.btn-verifikasi { background-color: #27ae60; }
+.btn-edit { background-color: #f39c12; }
+.btn-hapus { background-color: #e74c3c; }
+.btn-disabled { background-color: #cccccc; cursor: not-allowed; }
+
+/* Teks dan Badge Info Dana */
+.badge-dana { font-weight: bold; }
+.text-hijau { color: #27ae60; }
+.text-kuning { color: #f39c12; }
+
+
+/* Notifikasi Donasi */
+.don-alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.don-alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+.don-alert-sukses {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* Input Form Read Only */
+.don-masukan-mati {
+    background-color: #e9ecef !important;
+    cursor: not-allowed;
+}
+
+/* Sapaan & Logout Header (Bisa dipakai di semua page) */
+.home-sapaan {
+    color: white; 
+    font-size: 14px; 
+    margin-right: 10px;
+}
+.home-btn-logout {
+    background-color: #ff4d4d; 
+    color: white;
+}
+.home-btn-logout:hover {
+    background-color: #e60000;
+}
+
+/* ================================================
+   BAGIAN FORM (Edit & Tambah Kampanye)
+================================================ */
+
+.form-container { 
+    max-width: 800px; 
+    margin: 40px auto; 
+    background: white; 
+    padding: 30px; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+}
+
+.form-title { 
+    color: #132043; 
+    margin-top: 0;
+    margin-bottom: 20px; 
+    border-bottom: 2px solid #F1B4BB; 
+    padding-bottom: 10px; 
+}
+
+/* Tombol Aksi Form */
+.btn-simpan { 
+    background-color: #132043; 
+    color: white; 
+    padding: 12px 20px; 
+    border: none; 
+    border-radius: 6px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    width: 100%; 
+    font-size: 16px; 
+    margin-top: 10px; 
+}
+.btn-simpan:hover { background-color: #1F4172; }
+
+.btn-kembali {
+    display: inline-block;
+    background-color: #1F4172; 
+    color: #ffffff !important; 
+    border: none; 
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+.btn-kembali:hover { background-color: #F1B4BB; }
+
+/* Elemen Spesifik Edit Kampanye */
+.img-preview { 
+    width: 150px; 
+    height: auto; 
+    border-radius: 6px; 
+    margin-top: 10px; 
+    border: 1px solid #ccc; 
+}
+
+.form-hr {
+    margin: 20px 0; 
+    border: 1px solid #eee;
+}
+
+.form-keterangan-kecil {
+    font-size: 12px; 
+    color: #666; 
+    margin: 0 0 5px 0;
+}
+
+.form-label-gambar {
+    font-size: 13px; 
+    font-weight: bold;
+}
+.form-bungkus-gambar {
+    margin-top: 10px;
+}
+
+/* ================================================
+   BAGIAN PAGINATION & UTILITY (Index)
+================================================ */
+
+.pagination { 
+    display: flex; 
+    justify-content: center; 
+    gap: 10px; 
+    margin-top: 40px; 
+}
+
+.page-link { 
+    padding: 8px 16px; 
+    background-color: #132043; 
+    color: white; 
+    border-radius: 5px; 
+    text-decoration: none; 
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.page-link:hover { 
+    background-color: #1F4172; 
+    color: white;
+}
+
+/* Class saat halaman sedang aktif dipilih */
+.page-link.active { 
+    background-color: #F1B4BB; 
+    color: #132043; 
+    font-weight: bold; 
+}
+
+/* Pesan jika kampanye tidak ada */
+.home-kampanye-kosong {
+    text-align: center; 
+    width: 100%; 
+    grid-column: 1 / -1;
+    color: #666;
+    padding: 20px 0;
+}
+
+/* Helper margin */
+.mt-15 {
+    margin-top: 15px;
+}
+
+/* Teks Pelengkap Form Tambah Kampanye */
+.form-subjudul {
+    color: #666;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.form-sub-header {
+    color: #132043; 
+    margin-bottom: 15px;
+}
+
+/* ================================================
+   BAGIAN VERIFIKASI DONASI
+================================================ */
+.verifikasi-container { 
+    max-width: 1000px; 
+    margin: 40px auto; 
+    padding: 0 20px; 
+    min-height: 60vh; 
+}
+
+/* Kotak Info Ringkasan */
+.info-panel { display: flex; gap: 20px; margin-bottom: 20px; }
+.info-box { 
+    flex: 1; 
+    background: white; 
+    padding: 20px; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+    border-left: 5px solid #132043; 
+}
+.info-box h4 { margin: 0 0 10px 0; color: #555; }
+.info-box .nilai { font-size: 24px; font-weight: bold; color: #1F4172; }
+.info-detail { font-size: 13px; color: #666; margin-top: 5px; }
+
+/* Modifikasi Warna Border Kotak Info */
+.border-hijau { border-left-color: #27ae60 !important; }
+.border-kuning { border-left-color: #f39c12 !important; }
+.border-merah { border-left-color: #e74c3c !important; }
+
+/* Tabel Verifikasi */
+.table-responsive { overflow-x: auto; }
+.tabel-verifikasi { 
+    width: 100%; 
+    border-collapse: collapse; 
+    background: white; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+    border-radius: 8px; 
+    overflow: hidden; 
+    margin-top: 20px; 
+}
+.tabel-verifikasi th, .tabel-verifikasi td { 
+    padding: 15px; 
+    text-align: left; 
+    border-bottom: 1px solid #eee; 
+    font-size: 14px; 
+}
+.tabel-verifikasi th { background-color: #132043; color: white; }
+
+/* Badge Status Donasi */
+.badge { 
+    padding: 5px 10px; 
+    border-radius: 20px; 
+    font-size: 12px; 
+    font-weight: bold; 
+    color: white; 
+    display: inline-block; 
+}
+.bg-pending { background-color: #f39c12; }
+.bg-verified { background-color: #27ae60; }
+.bg-rejected { background-color: #e74c3c; }
+
+/* Tombol Aksi Tabel */
+.btn-terima { background-color: #27ae60; }
+.btn-tolak { background-color: #e74c3c; }
+.btn-aksi:hover { opacity: 0.8; }
+.bukti-img { 
+    width: 60px; 
+    height: auto; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    border: 1px solid #ccc; 
+}
+
+/* Helper Class (Utility) */
+.text-merah { color: #e74c3c; }
+.text-muted { color: #888; }
+.d-inline { display: inline; }
+.text-center { text-align: center; }
+.mt-20 { margin-top: 20px; }

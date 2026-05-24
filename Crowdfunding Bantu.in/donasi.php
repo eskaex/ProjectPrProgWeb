@@ -188,12 +188,12 @@ if ($persentase > 100) $persentase = 100;
 
 
                 <?php if(isset($error_msg)): ?>
-                    <div style="background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+                    <div class="don-alert don-alert-error">
                         <?= $error_msg ?>
                     </div>
                 <?php endif; ?>
                 <?php if(isset($success_msg)): ?>
-                    <div style="background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+                    <div class="don-alert don-alert-sukses">
                         <?= $success_msg ?>
                     </div>
                 <?php endif; ?>
@@ -203,7 +203,7 @@ if ($persentase > 100) $persentase = 100;
                     <div class="don-kelompok">
                         <label class="don-keterangan-input">Nama Lengkap</label>
 
-                        <input class="don-masukan" type="text" value="<?= htmlspecialchars($_SESSION['nama'] ?? '') ?>" readonly style="background-color: #e9ecef;">
+                        <input class="don-masukan don-masukan-mati" type="text" value="<?= htmlspecialchars($_SESSION['nama'] ?? '') ?>" readonly>
                     </div>
 
                     <div class="don-kelompok">

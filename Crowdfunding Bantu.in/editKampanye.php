@@ -85,33 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Kampanye - Bantu.in</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .form-container { max-width: 800px; margin: 40px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .form-title { color: #132043; margin-bottom: 20px; border-bottom: 2px solid #F1B4BB; padding-bottom: 10px; }
-        .don-kelompok { margin-bottom: 15px; }
-        .don-keterangan-input { font-weight: bold; display: block; margin-bottom: 5px; color: #132043; }
-        .don-masukan { width: 100%; padding: 10px; border: 1px solid #c8d0dc; border-radius: 6px; background: #FDF0F0; box-sizing: border-box; }
-        .don-masukan:focus { outline: none; border-color: #1F4172; background: white; }
-        .img-preview { width: 150px; height: auto; border-radius: 6px; margin-top: 10px; border: 1px solid #ccc; }
-        .btn-simpan { background-color: #132043; color: white; padding: 12px 20px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; margin-top: 10px; }
-        .btn-simpan:hover { background-color: #1F4172; }
-        .btn-kembali {
-            display: inline-block;
-            background-color: #1F4172; 
-            color: #ffffff !important; 
-            border: none; 
-            padding: 8px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-        .btn-kembali:hover {
-            background-color: #F1B4BB;
-        }
-    </style>
 </head>
 <body class="halaman-home">
 
@@ -122,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <span class="home-logo-text">Bantu.in</span>
             </a>
             <nav class="home-navbar">
-                <span style="color:white; font-size:14px; margin-right:10px;">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
+                <span class="home-sapaan">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
             </nav>
         </div>
     </header>
@@ -131,10 +104,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="form-container">
             <a href="dashboard.php" class="btn-kembali">&laquo; Kembali ke Dashboard</a>
 
-            <h2 class="form-title" style="margin-top: 0;">Edit Kampanye</h2>
+            <h2 class="form-title">Edit Kampanye</h2>
 
             <?php if(isset($error_msg)): ?>
-                <div style="background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 20px; border-radius: 5px;">
+                <div class="don-alert don-alert-error">
                     <?= $error_msg ?>
                 </div>
             <?php endif; ?>
@@ -171,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input class="don-masukan" type="date" name="batas_waktu" value="<?= $kampanye['batas_waktu'] ?>" required>
                 </div>
 
-                <hr style="margin: 20px 0; border: 1px solid #eee;">
+                <hr class="form-hr">
                 <h4>Informasi Rekening Pencairan</h4>
                 
                 <div class="don-kelompok">
@@ -189,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input class="don-masukan" type="text" name="atas_nama" value="<?= htmlspecialchars($kampanye['atas_nama'] ?? '') ?>" required>
                 </div>
 
-                <hr style="margin: 20px 0; border: 1px solid #eee;">
+                <hr class="form-hr">
 
                 <div class="don-kelompok">
                     <label class="don-keterangan-input">Deskripsi Kampanye</label>
@@ -198,11 +171,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="don-kelompok">
                     <label class="don-keterangan-input">Ganti Poster / Gambar (Opsional)</label>
-                    <p style="font-size: 12px; color: #666; margin: 0 0 5px 0;">*Biarkan kosong jika tidak ingin mengubah gambar.</p>
+                    <p class="form-keterangan-kecil">*Biarkan kosong jika tidak ingin mengubah gambar.</p>
                     <input class="don-masukan" type="file" name="gambar_baru" accept=".jpg, .jpeg, .png">
                     
-                    <div style="margin-top: 10px;">
-                        <span style="font-size: 13px; font-weight:bold;">Gambar saat ini:</span><br>
+                    <div class="form-bungkus-gambar">
+                        <span class="form-label-gambar">Gambar saat ini:</span><br>
                         <img src="<?= htmlspecialchars($kampanye['gambar']) ?>" alt="Poster Saat Ini" class="img-preview">
                     </div>
                 </div>

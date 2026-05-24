@@ -10,7 +10,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'penyelenggara') {
 $user_id = $_SESSION['user_id'];
 $id_kampanye = isset($_GET['id_kampanye']) ? (int)$_GET['id_kampanye'] : 0;
 
-
 $cek_sql = "SELECT judul FROM kampanye WHERE id = ? AND penyelenggara_id = ?";
 $stmt_cek = $conn->prepare($cek_sql);
 $stmt_cek->bind_param("ii", $id_kampanye, $user_id);
@@ -55,7 +54,6 @@ $stmt_sum->bind_param("i", $id_kampanye);
 $stmt_sum->execute();
 $ringkasan = $stmt_sum->get_result()->fetch_assoc();
 
-
 $list_sql = "SELECT d.*, u.nama AS nama_donatur 
              FROM donasi d 
              JOIN users u ON d.donatur_id = u.id 
@@ -78,47 +76,8 @@ $info_web = $result_info->fetch_assoc();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verifikasi Donasi - Bantu.in</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .verifikasi-container { max-width: 1000px; margin: 40px auto; padding: 0 20px; min-height: 60vh; }
-        .info-panel { display: flex; gap: 20px; margin-bottom: 20px; }
-        .info-box { flex: 1; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 5px solid #132043; }
-        .info-box h4 { margin: 0 0 10px 0; color: #555; }
-        .info-box .nilai { font-size: 24px; font-weight: bold; color: #1F4172; }
-        
-        .tabel-verifikasi { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; margin-top: 20px; }
-        .tabel-verifikasi th, .tabel-verifikasi td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; font-size: 14px; }
-        .tabel-verifikasi th { background-color: #132043; color: white; }
-        
-        .badge { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; color: white; display: inline-block; }
-        .bg-pending { background-color: #f39c12; }
-        .bg-verified { background-color: #27ae60; }
-        .bg-rejected { background-color: #e74c3c; }
-        
-        .btn-aksi { padding: 6px 12px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; color: white; margin-right: 5px; }
-        .btn-terima { background-color: #27ae60; }
-        .btn-tolak { background-color: #e74c3c; }
-        .btn-aksi:hover { opacity: 0.8; }
-        .bukti-img { width: 60px; height: auto; border-radius: 4px; cursor: pointer; border: 1px solid #ccc; }
-        .btn-kembali {
-            display: inline-block;
-            background-color: #1F4172; 
-            color: #ffffff !important; 
-            border: none; 
-            padding: 8px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-        .btn-kembali:hover {
-            background-color: #F1B4BB;
-        }
-    </style>
 </head>
 <body class="halaman-home">
-
 
     <header class="home-header">
         <div class="home-container home-header-inner">
@@ -129,8 +88,8 @@ $info_web = $result_info->fetch_assoc();
             <nav class="home-navbar">
                 <a href="index.php" class="home-nav-link">Beranda</a>
                 <a href="dashboard.php" class="home-nav-link aktif">Dasbor Saya</a>
-                <span style="color:white; font-size:14px; margin-right:10px;">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
-                <a href="logout.php" class="home-btn-login" style="background-color: #ff4d4d; color: white;">Logout</a>
+                <span class="home-sapaan">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
+                <a href="logout.php" class="home-btn-login home-btn-logout">Logout</a>
             </nav>
         </div>
     </header>
@@ -138,41 +97,41 @@ $info_web = $result_info->fetch_assoc();
     <main class="verifikasi-container">
         <a href="dashboard.php" class="btn-kembali">&laquo; Kembali ke Dashboard</a>
         
-        <h2 style="margin-top: 20px;">Verifikasi Donasi: <?= htmlspecialchars($kampanye['judul']) ?></h2>
+        <h2 class="mt-20">Verifikasi Donasi: <?= htmlspecialchars($kampanye['judul']) ?></h2>
         
         <?php if(isset($_SESSION['pesan'])): ?>
-            <div style="background-color: #d4edda; color: #155724; padding: 10px; margin: 20px 0; border-radius: 5px;">
+            <div class="don-alert don-alert-sukses">
                 <?= $_SESSION['pesan']; unset($_SESSION['pesan']); ?>
             </div>
         <?php endif; ?>
 
         <div class="info-panel">
-            <div class="info-box" style="border-left-color: #27ae60;">
+            <div class="info-box border-hijau">
                 <h4>Dana Terkumpul</h4>
                 <div class="nilai text-hijau">Rp <?= number_format($ringkasan['dana_terkumpul'], 0, ',', '.') ?></div>
-                <div style="font-size: 13px; color: #666; margin-top: 5px;">
+                <div class="info-detail">
                     ✅ <?= $ringkasan['jumlah_terkumpul'] ?> donasi diterima
                 </div>
             </div>
             
-            <div class="info-box" style="border-left-color: #f39c12;">
+            <div class="info-box border-kuning">
                 <h4>Dana Menunggu</h4>
                 <div class="nilai text-kuning">Rp <?= number_format($ringkasan['dana_pending'], 0, ',', '.') ?></div>
-                <div style="font-size: 13px; color: #666; margin-top: 5px;">
+                <div class="info-detail">
                     ⏳ <?= $ringkasan['jumlah_pending'] ?> donasi pending
                 </div>
             </div>
 
-            <div class="info-box" style="border-left-color: #e74c3c;">
+            <div class="info-box border-merah">
                 <h4>Dana Ditolak</h4>
-                <div class="nilai" style="color: #e74c3c;">Rp <?= number_format($ringkasan['dana_ditolak'], 0, ',', '.') ?></div>
-                <div style="font-size: 13px; color: #666; margin-top: 5px;">
+                <div class="nilai text-merah">Rp <?= number_format($ringkasan['dana_ditolak'], 0, ',', '.') ?></div>
+                <div class="info-detail">
                     ❌ <?= $ringkasan['jumlah_ditolak'] ?> donasi ditolak
                 </div>
             </div>
         </div>
 
-        <div style="overflow-x: auto;">
+        <div class="table-responsive">
             <table class="tabel-verifikasi">
                 <thead>
                     <tr>
@@ -192,7 +151,7 @@ $info_web = $result_info->fetch_assoc();
                                 <td><?= date('d/m/Y H:i', strtotime($row['created_at'])) ?></td>
                                 <td>
                                     <?= $row['is_anonim'] ? '<i>Hamba Allah</i>' : htmlspecialchars($row['nama_donatur']) ?>
-                                    <br><small style="color:#888;">Pesan: <?= htmlspecialchars($row['pesan'] ?: '-') ?></small>
+                                    <br><small class="text-muted">Pesan: <?= htmlspecialchars($row['pesan'] ?: '-') ?></small>
                                 </td>
                                 <td><strong>Rp <?= number_format($row['nominal'], 0, ',', '.') ?></strong></td>
                                 <td><?= htmlspecialchars($row['metode_pembayaran']) ?></td>
@@ -210,26 +169,26 @@ $info_web = $result_info->fetch_assoc();
                                 </td>
                                 <td>
                                     <?php if($row['status'] === 'PENDING'): ?>
-                                        <form action="" method="POST" style="display:inline;">
+                                        <form action="" method="POST" class="d-inline">
                                             <input type="hidden" name="id_donasi" value="<?= $row['id'] ?>">
                                             <input type="hidden" name="aksi" value="terima">
                                             <button type="submit" class="btn-aksi btn-terima" onclick="return confirm('Terima donasi ini? Dana terkumpul akan bertambah.');">Terima</button>
                                         </form>
                                         
-                                        <form action="" method="POST" style="display:inline;">
+                                        <form action="" method="POST" class="d-inline">
                                             <input type="hidden" name="id_donasi" value="<?= $row['id'] ?>">
                                             <input type="hidden" name="aksi" value="tolak">
                                             <button type="submit" class="btn-aksi btn-tolak" onclick="return confirm('Tolak donasi ini? Data tidak dapat dikembalikan.');">Tolak</button>
                                         </form>
                                     <?php else: ?>
-                                        <span style="color:#888;">Selesai</span>
+                                        <span class="text-muted">Selesai</span>
                                     <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="7" style="text-align: center;">Belum ada donasi untuk kampanye ini.</td>
+                            <td colspan="7" class="text-center">Belum ada donasi untuk kampanye ini.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>

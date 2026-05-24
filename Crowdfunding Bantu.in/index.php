@@ -6,7 +6,6 @@ $limit = 5;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 
-
 $search_judul = isset($_GET['judul']) ? $_GET['judul'] : '';
 $search_kategori = isset($_GET['kategori']) ? $_GET['kategori'] : '';
 $search_lokasi = isset($_GET['lokasi']) ? $_GET['lokasi'] : '';
@@ -62,6 +61,7 @@ $types .= "ii";
 $stmt_data->bind_param($types, ...$params);
 $stmt_data->execute();
 $result = $stmt_data->get_result();
+
 $sql_info = "SELECT * FROM info_website LIMIT 1";
 $result_info = $conn->query($sql_info);
 $info_web = $result_info->fetch_assoc();
@@ -74,12 +74,6 @@ $info_web = $result_info->fetch_assoc();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bantu.in - Platform Crowdfunding Sosial</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .pagination { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
-        .page-link { padding: 8px 16px; background: #132043; color: white; border-radius: 5px; text-decoration: none; }
-        .page-link:hover { background: #1F4172; }
-        .page-link.active { background: #F1B4BB; color: #132043; font-weight: bold; }
-    </style>
 </head>
 <body class="halaman-home">
 
@@ -98,8 +92,8 @@ $info_web = $result_info->fetch_assoc();
                 <a href="#" class="home-nav-link">Tentang Kami</a>
                 
                 <?php if(isset($_SESSION['user_id'])): ?>
-                    <span style="color:white; font-size:14px; margin-right:10px;">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
-                    <a href="logout.php" class="home-btn-login" style="background-color: #ff4d4d; color: white;">Logout</a>
+                    <span class="home-sapaan">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
+                    <a href="logout.php" class="home-btn-login home-btn-logout">Logout</a>
                 <?php else: ?>
                     <a href="login.php" class="home-btn-login">Login</a>
                 <?php endif; ?>
@@ -107,7 +101,6 @@ $info_web = $result_info->fetch_assoc();
         </div>
     </header>
     
-
     <section class="home-hero">
         <div class="home-container">
             <h1>Bersama Kita Bisa Membantu Sesama</h1>
@@ -115,7 +108,6 @@ $info_web = $result_info->fetch_assoc();
             <a href="#daftar-kampanye" class="home-btn-utama">Lihat Kampanye</a>
         </div>
     </section>
-
 
     <section class="home-section-pencarian" id="pencarian">
         <div class="home-container">
@@ -161,7 +153,7 @@ $info_web = $result_info->fetch_assoc();
                                 <h3 class="home-card-judul"><?= htmlspecialchars($row['judul']) ?></h3>
                                 <p class="home-card-penyelenggara">🏢 Penyelenggara: <strong><?= htmlspecialchars($row['nama_penyelenggara']) ?></strong></p>
                                 
-                                <table class="home-card-info" style="margin-top:15px;">
+                                <table class="home-card-info mt-15">
                                     <tr>
                                         <td>Target Dana</td>
                                         <td>: Rp <?= number_format($row['target_dana'], 0, ',', '.') ?></td>
@@ -180,22 +172,21 @@ $info_web = $result_info->fetch_assoc();
                         </div>
                     <?php endwhile; ?>
                 <?php else: ?>
-                    <p style="text-align: center; width: 100%; grid-column: 1 / -1;">Tidak ada kampanye yang ditemukan atau sedang aktif.</p>
+                    <p class="home-kampanye-kosong">Tidak ada kampanye yang ditemukan atau sedang aktif.</p>
                 <?php endif; ?>
             </div>
 
             <?php if($total_pages > 1): ?>
-            <div class="pagination" style="display: flex; justify-content: center; gap: 10px; margin-top: 40px;">
+            <div class="pagination">
                 <?php 
                 $query_params = $_GET;
-                
                 for($i = 1; $i <= $total_pages; $i++): 
                     $query_params['page'] = $i;
                     $link = "index.php?" . http_build_query($query_params);
+                    // Menentukan class 'active' secara dinamis
+                    $active_class = ($i == $page) ? 'active' : '';
                 ?>
-                    <a href="<?= $link ?>" class="page-link" 
-                       style="padding: 8px 16px; border-radius: 5px; text-decoration: none; 
-                              <?= ($i == $page) ? 'background-color: #F1B4BB; color: #132043; font-weight: bold;' : 'background-color: #132043; color: white;' ?>">
+                    <a href="<?= $link ?>" class="page-link <?= $active_class ?>">
                         <?= $i ?>
                     </a>
                 <?php endfor; ?>
@@ -212,7 +203,7 @@ $info_web = $result_info->fetch_assoc();
                     <span class="home-logo-icon">♥︎</span>
                     <span class="home-logo-text">Bantu.in</span>
                 </div>
-                <p><?= htmlspecialchars($info_web['deskripsi']) ?></p>
+                <p><?= htmlspecialchars($info_web['deskripsi'] ?? 'Platform crowdfunding sosial Indonesia') ?></p>
             </div>
             <div class="home-footer-kolom">
                 <h4>Navigasi</h4>
@@ -236,9 +227,9 @@ $info_web = $result_info->fetch_assoc();
             <div class="home-footer-kolom">
                 <h4>Hubungi Kami</h4>
                 <ul>
-                    <li>📧 <?= htmlspecialchars($info_web['email']) ?></li>
-                    <li>📞 <?= htmlspecialchars($info_web['no_telepon']) ?></li>
-                    <li>📍 <?= htmlspecialchars($info_web['alamat']) ?></li>
+                    <li>📧 <?= htmlspecialchars($info_web['email'] ?? 'halo@bantu.in') ?></li>
+                    <li>📞 <?= htmlspecialchars($info_web['no_telepon'] ?? '0800-1234-5678') ?></li>
+                    <li>📍 <?= htmlspecialchars($info_web['alamat'] ?? 'Jakarta, Indonesia') ?></li>
                 </ul>
             </div>
         </div>
