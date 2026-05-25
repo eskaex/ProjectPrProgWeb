@@ -1313,22 +1313,24 @@ button#login:active {
     margin-top: 40px; 
 }
 
-.page-link { 
+/* Memperkuat selektor dengan menambahkan .halaman-home di depannya */
+.halaman-home a.page-link { 
     padding: 8px 16px; 
     background-color: #132043; 
-    color: white; 
+    color: #ffffff; 
     border-radius: 5px; 
     text-decoration: none; 
     transition: background-color 0.2s, color 0.2s;
+    font-weight: normal;
 }
 
-.page-link:hover { 
+.halaman-home a.page-link:hover { 
     background-color: #1F4172; 
-    color: white;
+    color: #ffffff;
 }
 
 /* Class saat halaman sedang aktif dipilih */
-.page-link.active { 
+.halaman-home a.page-link.active { 
     background-color: #F1B4BB; 
     color: #132043; 
     font-weight: bold; 
