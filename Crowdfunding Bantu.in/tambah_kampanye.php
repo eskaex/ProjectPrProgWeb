@@ -11,15 +11,13 @@ $user_id = $_SESSION['user_id'];
 
 if (isset($_POST['submit'])) {
     
-    // Menangkap semua inputan dari form
     $judul = mysqli_real_escape_string($conn, trim($_POST['judul']));
     $kategori = mysqli_real_escape_string($conn, trim($_POST['kategori']));
     $lokasi = mysqli_real_escape_string($conn, trim($_POST['lokasi']));
     $deskripsi = mysqli_real_escape_string($conn, trim($_POST['deskripsi']));
     $target_dana = (int)$_POST['target_dana'];
     $batas_waktu = $_POST['batas_waktu'];
-    
-    // Menangkap inputan rekening
+
     $nama_bank = mysqli_real_escape_string($conn, trim($_POST['nama_bank']));
     $no_rekening = mysqli_real_escape_string($conn, trim($_POST['no_rekening']));
     $atas_nama = mysqli_real_escape_string($conn, trim($_POST['atas_nama']));
@@ -100,7 +98,7 @@ if (isset($_POST['submit'])) {
 
     <main class="container">
         <div class="form-container">
-            <a href="dashboard.php" class="btn-kembali">&laquo; Kembali ke Dasbor</a>
+            <a href="dashboard.php" class="btn-kembali">&laquo; Kembali ke Dashboard</a>
             
             <h2 class="form-title">Buat Kampanye Baru</h2>
             <p class="form-subjudul">Isi detail di bawah ini untuk memulai penggalangan dana kebaikan Anda.</p>

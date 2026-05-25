@@ -17,7 +17,7 @@ $stmt_cek->execute();
 $hasil_cek = $stmt_cek->get_result();
 
 if ($hasil_cek->num_rows === 0) {
-    die("<h2>Akses Ditolak!</h2><p>Kampanye tidak ditemukan atau Anda bukan pemilik kampanye ini.</p><a href='dashboard.php'>Kembali ke Dasbor</a>");
+    die("<h2>Akses Ditolak!</h2><p>Kampanye tidak ditemukan atau Anda bukan pemilik kampanye ini.</p><a href='dashboard.php'>Kembali ke Dashboard</a>");
 }
 $kampanye = $hasil_cek->fetch_assoc();
 
@@ -87,7 +87,7 @@ $info_web = $result_info->fetch_assoc();
             </a>
             <nav class="home-navbar">
                 <a href="index.php" class="home-nav-link">Beranda</a>
-                <a href="dashboard.php" class="home-nav-link aktif">Dasbor Saya</a>
+                <a href="dashboard.php" class="home-nav-link aktif">Dashboard Saya</a>
                 <span class="home-sapaan">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
                 <a href="logout.php" class="home-btn-login home-btn-logout">Logout</a>
             </nav>
