@@ -50,9 +50,11 @@ $info_web = $result_info->fetch_assoc();
             </div>
             <nav class="home-navbar">
                 <a href="index.php" class="home-nav-link">Beranda</a>
-                <a href="dashboard.php" class="home-nav-link aktif">Dasbor Pengelola</a>
-                <span style="color:white; font-size:14px; margin-right:10px;">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
-                <a href="logout.php" class="home-btn-login" style="background-color: #ff4d4d; color: white;">Logout</a>
+                <a href="index.php#daftar-kampanye" class="home-nav-link">Kampanye</a>
+                <a href="dashboard.php" class="home-nav-link aktif">Dashboard Saya</a>
+                <a href="index.php#tentang" class="home-nav-link">Tentang Kami</a>
+                <span class="home-sapaan">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
+                <a href="logout.php" class="home-btn-login home-btn-logout">Logout</a>
             </nav>
         </div>
     </header>

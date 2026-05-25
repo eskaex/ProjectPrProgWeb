@@ -17,7 +17,7 @@ $stmt_cek->execute();
 $hasil = $stmt_cek->get_result();
 
 if ($hasil->num_rows === 0) {
-    die("<h2>Akses Ditolak!</h2><p>Kampanye tidak ditemukan atau Anda tidak memiliki hak akses.</p><a href='dashboard.php'>Kembali ke Dasbor</a>");
+    die("<h2>Akses Ditolak!</h2><p>Kampanye tidak ditemukan atau Anda tidak memiliki hak akses.</p><a href='dashboard.php'>Kembali ke Dashboard</a>");
 }
 $kampanye = $hasil->fetch_assoc();
 
