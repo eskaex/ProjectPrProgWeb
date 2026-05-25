@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Bulan Mei 2026 pada 11.32
+-- Waktu pembuatan: 25 Bulan Mei 2026 pada 07.47
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -46,8 +46,12 @@ CREATE TABLE `donasi` (
 
 INSERT INTO `donasi` (`id`, `kampanye_id`, `donatur_id`, `nominal`, `pesan`, `bukti_transfer`, `status`, `is_anonim`, `metode_pembayaran`, `created_at`) VALUES
 (1, 1, 3, 10000000.00, 'Semoga cepat surut', 'gambar/bukti1.jpg', 'VERIFIED', 0, 'Transfer', '2026-05-02 11:38:29'),
-(2, 1, 3, 5000000.00, 'Semangat', 'gambar/bukti2.jpg', 'PENDING', 0, 'Transfer', '2026-05-02 11:38:29'),
-(3, 2, 3, 1000000.00, 'Untuk adik-adik', 'gambar/bukti3.jpg', 'VERIFIED', 0, 'E-Wallet', '2026-05-02 11:38:29');
+(2, 1, 3, 5000000.00, 'Semangat', 'gambar/bukti2.jpg', 'VERIFIED', 0, 'Transfer', '2026-05-02 11:38:29'),
+(3, 2, 3, 1000000.00, 'Untuk adik-adik', 'gambar/bukti3.jpg', 'VERIFIED', 0, 'E-Wallet', '2026-05-02 11:38:29'),
+(4, 1, 3, 100000.00, 'Semangat', 'gambar/bukti_1778482276_695.jpeg', 'VERIFIED', 0, 'Transfer Bank', '2026-05-11 06:51:16'),
+(5, 1, 3, 40000000.00, '', 'gambar/bukti_1778482351_830.jpeg', 'REJECTED', 1, 'Kartu Kredit/Debit', '2026-05-11 06:52:31'),
+(6, 4, 3, 500000.00, 'wow', 'gambar/bukti_1778486458_843.jpg', 'PENDING', 0, 'E-Wallet', '2026-05-11 08:00:58'),
+(7, 1, 3, 10000.00, '', 'gambar/bukti_1779612325_355.jpg', 'PENDING', 0, 'Transfer Bank', '2026-05-24 08:45:25');
 
 -- --------------------------------------------------------
 
@@ -97,9 +101,15 @@ CREATE TABLE `kampanye` (
 --
 
 INSERT INTO `kampanye` (`id`, `penyelenggara_id`, `judul`, `kategori`, `lokasi`, `deskripsi`, `target_dana`, `batas_waktu`, `nama_bank`, `no_rekening`, `atas_nama`, `gambar`, `created_at`) VALUES
-(1, 1, 'Bantuan Banjir Bandang Demak', 'bencana', 'Demak, Jawa Tengah', 'Banjir melanda puluhan desa...', 50000000.00, '2026-04-15', 'Bank BCA', '1234567890', 'Relawan Peduli Demak', 'gambar/banjirDemak.jpg', '2026-05-02 11:38:29'),
-(2, 2, 'Renovasi Sekolah Pelosok NTT', 'pendidikan', 'Kupang, Nusa Tenggara Timur', 'Sekolah atap bocor butuh renovasi...', 100000000.00, '2026-05-30', 'Bank Mandiri', '0987654321', 'Yayasan Cerdas Nusantara', 'gambar/sekolahNTT.jpeg', '2026-05-02 11:38:29'),
-(3, 1, 'Logistik Korban Longsor', 'bencana', 'Demak, Jawa Tengah', 'Kebutuhan makanan dan selimut.', 20000000.00, '2026-04-10', 'Bank BRI', '1122334455', 'Relawan Peduli Demak', 'gambar/gempaCianjur.jpg', '2026-05-02 11:38:29');
+(1, 1, 'Bantuan Banjir Bandang Demak', 'bencana', 'Demak, Jawa Tengah', 'Banjir melanda puluhan desa...', 50000000.00, '2026-12-31', 'Bank BCA', '1234567890', 'Relawan Peduli Demak', 'gambar/banjirDemak.jpg', '2026-05-02 11:38:29'),
+(2, 2, 'Renovasi Sekolah Pelosok NTT', 'pendidikan', 'Kupang, Nusa Tenggara Timur', 'Sekolah atap bocor butuh renovasi...', 100000000.00, '2026-12-31', 'Bank Mandiri', '0987654321', 'Yayasan Cerdas Nusantara', 'gambar/sekolahNTT.jpeg', '2026-05-02 11:38:29'),
+(4, 1, 'Logistik Korban Longsor', 'bencana', 'Demak, Jawa Tengah', 'Kebutuhan makanan dan selimut.', 20000000.00, '2026-12-31', 'Bank BRI', '1122334455', 'Relawan Peduli Demak', 'gambar/gempaCianjur.jpg', '2026-05-11 06:23:57'),
+(5, 1, 'Bantuan Anak Yatim untuk Sekolah', 'pendidikan', 'Sleman, Yogyakarta, DI Yogyakarta', 'Bantuan kepada anak yatim untuk melanjutkan pendidikan.', 50000000.00, '2026-12-31', 'BCA', '1234567890', 'Relawan Peduli Demak', 'gambar/poster_6a0977f4cae350.50809124.jpg', '2026-05-17 08:10:28'),
+(6, 2, 'Beasiswa Papua', 'pendidikan', 'Jayapura, Papua', 'Bantu anak-anak berprestasi di pedalaman Papua untuk mendapatkan akses pendidikan yang lebih baik, seragam, dan fasilitas sekolah yang layak.', 50000000.00, '2026-12-31', 'BCA', '0987654321', 'Yayasan Cerdas Nusantara', 'gambar/beasiswaPapua.jpg', '2026-05-25 05:24:34'),
+(7, 1, 'Bantuan Air Bersih NTB', 'sosial', 'Mataram, Nusa Tenggara Barat', 'Warga di beberapa desa di NTB mengalami krisis air bersih saat kemarau panjang. Mari berdonasi untuk membangun sumur bor dan fasilitas air bersih.', 75000000.00, '2026-05-15', 'Mandiri', '1234567890', 'Relawan Peduli Demak', 'gambar/airBersihNTB.jpeg', '2026-05-25 05:24:34'),
+(8, 2, 'Bantuan Ibu dan Anak Sehat', 'kesehatan', 'Kudus, Jawa Tengah', 'Program penyediaan makanan bergizi, vitamin, dan pemeriksaan kesehatan rutin gratis untuk ibu hamil dan balita guna mencegah stunting di pelosok desa.', 35000000.00, '2026-09-30', 'BCA', '0987654321', 'Yayasan Cerdas Nusantara', 'gambar/ibuAnak.jpeg', '2026-05-25 05:24:34'),
+(9, 1, 'Bantuan Pangan Sulawesi', 'sosial', 'Makassar, Sulawesi Selatan', 'Penyaluran paket sembako darurat dan obat-obatan untuk keluarga yang terdampak musibah banjir dan tanah longsor di wilayah Sulawesi Selatan.', 45000000.00, '2026-08-20', 'Mandiri', '1234567890', 'Relawan Peduli Demak', 'gambar/pangan.jpeg', '2026-05-25 05:24:34'),
+(10, 2, 'Penghijauan Kota Pontianak', 'lingkungan', 'Pontianak, Kalimantan Barat', 'Mari kembalikan asrinya kota Pontianak dengan aksi menanam 1.000 bibit pohon untuk mengurangi polusi udara, mencegah erosi, dan menyejukkan kota.', 25000000.00, '2026-11-10', 'BCA', '0987654321', 'Yayasan Cerdas Nusantara', 'gambar/penghijauanKota.jpg', '2026-05-25 05:24:34');
 
 -- --------------------------------------------------------
 
@@ -167,7 +177,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `donasi`
 --
 ALTER TABLE `donasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `info_website`
@@ -179,7 +189,7 @@ ALTER TABLE `info_website`
 -- AUTO_INCREMENT untuk tabel `kampanye`
 --
 ALTER TABLE `kampanye`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
