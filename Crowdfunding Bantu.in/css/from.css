@@ -1,0 +1,115 @@
+.form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 36px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--primary-100);
+}
+
+.btn-kembali {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--white) !important;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none !important;
+    margin-bottom: 20px;
+    transition: var(--transition);
+    background: linear-gradient(135deg, var(--darkk-blue), var(--dark-blue));
+    padding: 14px 28px;
+    border-radius: var(--radius-md);
+    border: none;
+    box-shadow: 0 4px 12px rgba(19,32,67,0.25);
+}
+
+.btn-kembali:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(19,32,67,0.35);
+    background: linear-gradient(135deg, var(--dark-blue), var(--darkk-blue));
+}
+
+.form-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--primary-900);
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+    border-bottom: 3px solid var(--peach);
+    padding-bottom: 10px;
+}
+
+.form-subjudul {
+    font-size: 14px;
+    color: var(--primary-500);
+    margin-bottom: 28px;
+}
+
+.form-hr {
+    border: none;
+    border-top: 1px solid var(--primary-100);
+    margin: 28px 0;
+}
+
+.form-sub-header {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-800);
+    margin-bottom: 16px;
+}
+
+.form-keterangan-kecil {
+    font-size: 12px;
+    color: var(--primary-500);
+    margin-bottom: 8px;
+}
+
+.form-bungkus-gambar {
+    margin-top: 12px;
+}
+
+.form-label-gambar {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary-500);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.img-preview {
+    width: 200px;
+    height: auto;
+    border-radius: var(--radius);
+    margin-top: 8px;
+    border: 1px solid var(--primary-200);
+}
+
+.btn-simpan {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--darkk-blue), var(--dark-blue));
+    color: var(--pink-krem);
+    border: none;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: var(--transition);
+    margin-top: 8px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 12px rgba(19,32,67,0.25);
+}
+
+.btn-simpan:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(19,32,67,0.35);
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 24px 20px;
+    }
+}
