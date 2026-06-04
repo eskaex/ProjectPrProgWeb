@@ -1,0 +1,170 @@
+.verifikasi-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 24px;
+}
+
+.info-panel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 24px 0;
+}
+
+.info-box {
+    background: var(--white);
+    padding: 22px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--primary-100);
+    border-left: 4px solid;
+    transition: var(--transition);
+}
+
+.info-box:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.info-box h4 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--primary-500);
+    margin-bottom: 8px;
+}
+
+.info-box .nilai {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.info-box .info-detail {
+    font-size: 13px;
+    margin-top: 6px;
+    color: var(--primary-500);
+}
+
+.border-hijau { border-left-color: var(--emerald-500); }
+.border-kuning { border-left-color: var(--amber-500); }
+.border-merah { border-left-color: var(--rose-500); }
+
+.table-responsive {
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+}
+
+.tabel-verifikasi {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--primary-100);
+}
+
+.tabel-verifikasi thead {
+    background: linear-gradient(135deg, var(--darkk-blue), var(--dark-blue));
+}
+
+.tabel-verifikasi thead th {
+    color: var(--white);
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabel-verifikasi tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--primary-100);
+    font-size: 14px;
+    color: var(--primary-700);
+    vertical-align: middle;
+}
+
+.tabel-verifikasi tbody tr:hover {
+    background: var(--pink-krem);
+}
+
+.tabel-verifikasi tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.bukti-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--primary-200);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.bukti-img:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.bg-verified {
+    background: var(--emerald-100);
+    color: var(--emerald-600);
+}
+
+.bg-pending {
+    background: var(--amber-100);
+    color: var(--amber-600);
+}
+
+.bg-rejected {
+    background: var(--rose-100);
+    color: var(--rose-600);
+}
+
+.btn-terima {
+    background: var(--emerald-50) !important;
+    color: var(--emerald-600) !important;
+    border: 1px solid var(--emerald-100) !important;
+}
+
+.btn-terima:hover {
+    background: var(--emerald-100) !important;
+}
+
+.btn-tolak {
+    background: var(--rose-50) !important;
+    color: var(--rose-600) !important;
+    border: 1px solid var(--rose-100) !important;
+}
+
+.btn-tolak:hover {
+    background: var(--rose-100) !important;
+}
+
+@media (max-width: 1024px) {
+    .info-panel {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .info-panel {
+        grid-template-columns: 1fr;
+    }
+}
