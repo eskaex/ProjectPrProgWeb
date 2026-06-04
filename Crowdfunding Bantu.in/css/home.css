@@ -1,0 +1,411 @@
+.home-hero {
+    background: linear-gradient(135deg, var(--darkk-blue) 0%, var(--dark-blue) 50%, #1a365d 100%);
+    color: var(--white);
+    padding: 80px 0 90px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(241,180,187,0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 50%, rgba(31,65,114,0.15) 0%, transparent 50%);
+    animation: heroGlow 8s ease-in-out infinite alternate;
+}
+
+.home-hero .home-container {
+    position: relative;
+    z-index: 2;
+}
+
+.home-hero h1 {
+    font-size: 44px;
+    font-weight: 800;
+    margin-bottom: 18px;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.home-hero p {
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 600px;
+    margin: 0 auto 32px auto;
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+.home-btn-utama {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--peach), var(--peach-dark));
+    color: var(--darkk-blue) !important;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 36px;
+    border-radius: var(--radius-full);
+    transition: var(--transition);
+    text-decoration: none !important;
+    box-shadow: 0 4px 16px rgba(241,180,187,0.4);
+    letter-spacing: 0.3px;
+}
+
+.home-btn-utama:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(241,180,187,0.5);
+}
+
+.home-section-pencarian {
+    background: var(--white);
+    padding: 48px 0;
+    border-bottom: 3px solid var(--peach);
+    box-shadow: var(--shadow-sm);
+}
+
+.home-section-pencarian h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-900);
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+}
+
+.home-sub-judul {
+    color: var(--primary-500);
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+.home-form-pencarian {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+}
+
+.home-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.home-form-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary-700);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.home-form-group input,
+.home-form-group select {
+    padding: 10px 14px;
+    border: 1.5px solid var(--primary-200);
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    background: var(--pink-krem);
+    color: var(--primary-900);
+    outline: none;
+    transition: var(--transition);
+}
+
+.home-form-group input:focus,
+.home-form-group select:focus {
+    border-color: var(--dark-blue);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(31,65,114,0.15);
+}
+
+.home-form-group input::placeholder {
+    color: var(--primary-400);
+}
+
+.tombol-wrap {
+    flex: 0 !important;
+    min-width: auto !important;
+}
+
+.home-btn-cari {
+    background: linear-gradient(135deg, var(--dark-blue), var(--darkk-blue));
+    color: var(--white);
+    border: none;
+    padding: 10px 28px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: var(--transition);
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(19,32,67,0.25);
+}
+
+.home-btn-cari:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(19,32,67,0.35);
+}
+
+.home-section-kampanye {
+    padding: 56px 0;
+    flex: 1;
+}
+
+.home-section-kampanye h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-900);
+    letter-spacing: -0.5px;
+}
+
+.home-grid-kampanye {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 28px;
+}
+
+.home-card-kampanye {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--primary-100);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-slow);
+    position: relative;
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.home-card-kampanye:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-6px);
+    border-color: var(--peach);
+}
+
+.halaman-home .home-card-kampanye {
+    opacity: 0;
+}
+
+.home-card-kampanye:nth-child(1) { animation-delay: 0.1s; }
+.home-card-kampanye:nth-child(2) { animation-delay: 0.2s; }
+.home-card-kampanye:nth-child(3) { animation-delay: 0.3s; }
+.home-card-kampanye:nth-child(4) { animation-delay: 0.4s; }
+.home-card-kampanye:nth-child(5) { animation-delay: 0.5s; }
+.home-card-kampanye:nth-child(6) { animation-delay: 0.6s; }
+
+.home-card-poster {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: linear-gradient(135deg, var(--primary-200), var(--primary-100));
+    display: block;
+    transition: var(--transition-slow);
+}
+
+.home-card-kampanye:hover .home-card-poster {
+    transform: scale(1.03);
+}
+
+.home-card-isi {
+    padding: 18px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.home-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    margin-bottom: 10px;
+    width: fit-content;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.home-badge-bencana {
+    background: rgba(241,180,187,0.3);
+    color: #7a1a28;
+}
+
+.home-badge-pendidikan {
+    background: rgba(31,65,114,0.15);
+    color: var(--dark-blue);
+}
+
+.home-badge-sosial {
+    background: rgba(19,32,67,0.1);
+    color: var(--darkk-blue);
+}
+
+.home-badge-kesehatan {
+    background: var(--emerald-100);
+    color: var(--emerald-600);
+}
+
+.home-badge-lingkungan {
+    background: var(--emerald-100);
+    color: var(--emerald-600);
+}
+
+.home-card-judul {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-900);
+    margin-bottom: 8px;
+    line-height: 1.4;
+    letter-spacing: -0.3px;
+}
+
+.home-card-penyelenggara {
+    font-size: 13px;
+    color: var(--primary-500);
+    margin-bottom: 4px;
+}
+
+.home-card-lokasi {
+    font-size: 13px;
+    color: var(--primary-500);
+    margin-bottom: 12px;
+}
+
+.home-card-info {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.home-card-info td {
+    padding: 4px 0;
+    color: var(--primary-600);
+    vertical-align: top;
+}
+
+.home-card-info td:first-child {
+    width: 120px;
+    color: var(--primary-500);
+    font-weight: 500;
+}
+
+.home-card-info td:last-child {
+    font-weight: 600;
+    color: var(--primary-900);
+}
+
+.home-btn-detail {
+    display: block;
+    text-align: center;
+    background: linear-gradient(135deg, var(--darkk-blue), var(--dark-blue));
+    color: var(--pink-krem) !important;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 11px;
+    border-radius: var(--radius);
+    margin-top: auto;
+    transition: var(--transition);
+    text-decoration: none !important;
+    letter-spacing: 0.3px;
+}
+
+.home-btn-detail:hover {
+    background: linear-gradient(135deg, var(--dark-blue), var(--peach-dark));
+    box-shadow: 0 4px 12px rgba(19,32,67,0.25);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 36px;
+}
+
+.page-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-700);
+    background: var(--white);
+    border: 1.5px solid var(--primary-200);
+    transition: var(--transition);
+    text-decoration: none !important;
+}
+
+.page-link:hover {
+    background: var(--pink-krem);
+    border-color: var(--dark-blue);
+    color: var(--dark-blue);
+}
+
+.halaman-home a.page-link {
+
+}
+
+.halaman-home a.page-link:hover {
+    background: var(--pink-krem);
+    border-color: var(--dark-blue);
+    color: var(--dark-blue);
+}
+
+.page-link.active,
+.halaman-home a.page-link.active {
+    background: linear-gradient(135deg, var(--peach), var(--peach-dark));
+    color: var(--darkk-blue);
+    border-color: var(--peach);
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(241,180,187,0.4);
+}
+
+.home-kampanye-kosong {
+    text-align: center;
+    color: var(--primary-500);
+    padding: 60px 20px;
+    font-size: 16px;
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 1024px) {
+    .home-grid-kampanye {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .home-hero h1 {
+        font-size: 28px;
+    }
+
+    .home-grid-kampanye {
+        grid-template-columns: 1fr;
+    }
+
+    .home-form-pencarian {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-hero h1 {
+        font-size: 24px;
+    }
+}
