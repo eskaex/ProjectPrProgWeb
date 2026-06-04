@@ -1,0 +1,115 @@
+main.loginContainer {
+    min-height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, var(--pink-krem), rgba(241,180,187,0.15));
+}
+
+.loginPage {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    padding: 44px 40px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    border: 1px solid var(--primary-100);
+}
+
+.login-header {
+    margin-bottom: 32px;
+}
+
+.login-logo-icon {
+    font-size: 40px;
+    background: linear-gradient(135deg, var(--peach), var(--dark-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.login-sub {
+    font-size: 14px;
+    color: var(--primary-500);
+    margin: 0;
+}
+
+h2#tulisanLogin {
+    font-size: 24px;
+    letter-spacing: 4px;
+    color: var(--primary-900);
+    margin: 0 0 6px 0;
+    font-weight: 800;
+}
+
+.login-field {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.login-field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary-700);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.login-field input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--primary-200);
+    border-radius: var(--radius);
+    font-size: 14px;
+    background: var(--pink-krem);
+    color: var(--primary-900);
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: var(--transition);
+}
+
+.login-field input:focus {
+    border-color: var(--dark-blue);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(31,65,114,0.15);
+}
+
+.login-field input::placeholder {
+    color: var(--primary-400);
+}
+
+button#login {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, var(--darkk-blue), var(--dark-blue));
+    color: var(--pink-krem);
+    border: none;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(19,32,67,0.25);
+}
+
+button#login:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(19,32,67,0.35);
+}
+
+@media (max-width: 480px) {
+    .loginPage {
+        padding: 32px 24px;
+        margin: 0 16px;
+    }
+}
