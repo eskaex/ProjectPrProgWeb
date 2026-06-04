@@ -2,7 +2,11 @@
 session_start();
 require 'koneksi.php';
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'penyelenggara') {
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+if ($_SESSION['role'] !== 'penyelenggara') {
     header("Location: index.php");
     exit;
 }
