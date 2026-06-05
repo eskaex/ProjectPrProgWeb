@@ -9,6 +9,8 @@ $offset = ($page - 1) * $limit;
 $search_judul = isset($_GET['judul']) ? $_GET['judul'] : '';
 $search_kategori = isset($_GET['kategori']) ? $_GET['kategori'] : '';
 $search_lokasi = isset($_GET['lokasi']) ? $_GET['lokasi'] : '';
+$search_tanggal_dari = isset($_GET['tanggal_dari']) ? $_GET['tanggal_dari'] : '';
+$search_tanggal_sampai = isset($_GET['tanggal_sampai']) ? $_GET['tanggal_sampai'] : '';
 
 $sql_base = "
     FROM kampanye k
@@ -33,6 +35,16 @@ if (!empty($search_kategori)) {
 if (!empty($search_lokasi)) {
     $sql_base .= " AND k.lokasi LIKE ?";
     $params[] = "%" . $search_lokasi . "%";
+    $types .= "s";
+}
+if (!empty($search_tanggal_dari)) {
+    $sql_base .= " AND k.batas_waktu >= ?";
+    $params[] = $search_tanggal_dari;
+    $types .= "s";
+}
+if (!empty($search_tanggal_sampai)) {
+    $sql_base .= " AND k.batas_waktu <= ?";
+    $params[] = $search_tanggal_sampai;
     $types .= "s";
 }
 
@@ -131,6 +143,14 @@ $info_web = $result_info->fetch_assoc();
                 <div class="home-form-group">
                     <label for="lokasi">Lokasi</label>
                     <input type="text" id="lokasi" name="lokasi" value="<?= htmlspecialchars($search_lokasi) ?>" placeholder="Contoh: Jakarta, NTT...">
+                </div>
+                <div class="home-form-group">
+                    <label for="tanggal_dari">Batas Waktu Dari</label>
+                    <input type="date" id="tanggal_dari" name="tanggal_dari" value="<?= htmlspecialchars($search_tanggal_dari) ?>">
+                </div>
+                <div class="home-form-group">
+                    <label for="tanggal_sampai">Batas Waktu Sampai</label>
+                    <input type="date" id="tanggal_sampai" name="tanggal_sampai" value="<?= htmlspecialchars($search_tanggal_sampai) ?>">
                 </div>
                 <div class="home-form-group tombol-wrap">
                     <button type="submit" class="home-btn-cari">🔍 Cari</button>
