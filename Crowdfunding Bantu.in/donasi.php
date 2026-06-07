@@ -44,12 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $file_tmp = $_FILES['bukti_transfer']['tmp_name'];
             $file_name = $_FILES['bukti_transfer']['name'];
             $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-            $allowed_ext = ['jpg', 'jpeg', 'png'];
+            $allowed_ext = ['jpg', 'jpeg', 'png', 'pdf'];
 
             $max_size = 2 * 1024 * 1024;
 
             if (!in_array($file_ext, $allowed_ext)) {
-                $error_msg = "Format file tidak didukung! Harap unggah JPG, JPEG, atau PNG.";
+                $error_msg = "Format file tidak didukung! Harap unggah JPG, JPEG, PNG, atau PDF.";
             } elseif ($_FILES['bukti_transfer']['size'] > $max_size) {
                 $error_msg = "Ukuran file terlalu besar! Maksimal 2MB.";
             } else {
