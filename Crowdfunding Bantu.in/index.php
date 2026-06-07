@@ -206,7 +206,6 @@ $info_web = $result_info->fetch_assoc();
                 for($i = 1; $i <= $total_pages; $i++): 
                     $query_params['page'] = $i;
                     $link = "index.php?" . http_build_query($query_params);
-                    // Menentukan class 'active' secara dinamis
                     $active_class = ($i == $page) ? 'active' : '';
                 ?>
                     <a href="<?= $link ?>" class="page-link <?= $active_class ?>">
