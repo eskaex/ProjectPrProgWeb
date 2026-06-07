@@ -245,8 +245,8 @@ if ($persentase > 100) $persentase = 100;
                     </div>
 
                     <div class="don-kelompok">
-                        <label class="don-keterangan-input" for="bukti-pembayaran">Bukti Transfer (JPG, PNG)</label>
-                        <input class="don-masukan" type="file" name="bukti_transfer" id="bukti-pembayaran" accept=".jpg, .jpeg, .png" required>
+                        <label class="don-keterangan-input" for="bukti-pembayaran">Bukti Transfer (JPG, PNG, PDF)</label>
+                        <input class="don-masukan" type="file" name="bukti_transfer" id="bukti-pembayaran" accept=".jpg, .jpeg, .png, .pdf" required>
                         <small class="don-info-file">*Wajib diisi. Maksimal ukuran file 2MB</small>
                     </div>
 
