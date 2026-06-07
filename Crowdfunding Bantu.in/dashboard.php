@@ -56,7 +56,7 @@ $info_web = $result_info->fetch_assoc();
                 <a href="index.php" class="home-nav-link">Beranda</a>
                 <a href="index.php#daftar-kampanye" class="home-nav-link">Kampanye</a>
                 <a href="dashboard.php" class="home-nav-link aktif">Dashboard Saya</a>
-                <a href="index.php#tentang" class="home-nav-link">Tentang Kami</a>
+                <a href="riwayatPenyelenggara.php" class="home-nav-link">Riwayat Donasi</a>
                 <span class="home-sapaan">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
                 <a href="logout.php" class="home-btn-login home-btn-logout">Logout</a>
             </nav>

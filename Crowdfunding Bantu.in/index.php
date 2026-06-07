@@ -99,9 +99,10 @@ $info_web = $result_info->fetch_assoc();
                 <a href="index.php" class="home-nav-link aktif">Beranda</a>
                 <a href="#daftar-kampanye" class="home-nav-link">Kampanye</a>
                 <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'penyelenggara'): ?>
-                <a href="dashboard.php" class="home-nav-link">Dashboard Saya</a>
+                    <a href="dashboard.php" class="home-nav-link">Dashboard Saya</a>
+                    <a href="riwayatPenyelenggara.php" class="home-nav-link">Riwayat Donasi</a>
                 <?php elseif(isset($_SESSION['role']) && $_SESSION['role'] === 'donatur'): ?>
-                <a href="riwayatDonatur.php" class="home-nav-link">Riwayat Donasi</a>
+                    <a href="riwayatDonatur.php" class="home-nav-link">Riwayat Donasi</a>
                 <?php endif; ?>
                 <a href="#" class="home-nav-link">Tentang Kami</a>
                 
