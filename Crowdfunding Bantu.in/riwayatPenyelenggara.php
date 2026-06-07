@@ -14,13 +14,15 @@ if ($_SESSION['role'] !== 'penyelenggara') {
 $user_id = $_SESSION['user_id'];
 
 $sql_ringkasan = "SELECT 
-    COALESCE(SUM(CASE WHEN status = 'VERIFIED' THEN nominal ELSE 0 END), 0) AS total_verified,
-    COUNT(CASE WHEN status = 'VERIFIED' THEN 1 END) AS jml_verified,
-    COALESCE(SUM(CASE WHEN status = 'PENDING' THEN nominal ELSE 0 END), 0) AS total_pending,
-    COUNT(CASE WHEN status = 'PENDING' THEN 1 END) AS jml_pending,
-    COALESCE(SUM(CASE WHEN status = 'REJECTED' THEN nominal ELSE 0 END), 0) AS total_rejected,
-    COUNT(CASE WHEN status = 'REJECTED' THEN 1 END) AS jml_rejected
-    FROM donasi WHERE donatur_id = ?";
+    COALESCE(SUM(CASE WHEN d.status = 'VERIFIED' THEN d.nominal ELSE 0 END), 0) AS total_verified,
+    COUNT(CASE WHEN d.status = 'VERIFIED' THEN 1 END) AS jml_verified,
+    COALESCE(SUM(CASE WHEN d.status = 'PENDING' THEN d.nominal ELSE 0 END), 0) AS total_pending,
+    COUNT(CASE WHEN d.status = 'PENDING' THEN 1 END) AS jml_pending,
+    COALESCE(SUM(CASE WHEN d.status = 'REJECTED' THEN d.nominal ELSE 0 END), 0) AS total_rejected,
+    COUNT(CASE WHEN d.status = 'REJECTED' THEN 1 END) AS jml_rejected
+    FROM donasi d
+    JOIN kampanye k ON d.kampanye_id = k.id
+    WHERE k.penyelenggara_id = ?";
 $stmt_r = $conn->prepare($sql_ringkasan);
 $stmt_r->bind_param("i", $user_id);
 $stmt_r->execute();
@@ -30,10 +32,12 @@ $sql_riwayat = "
     SELECT d.id, d.nominal, d.pesan, d.bukti_transfer, d.status, 
            d.metode_pembayaran, d.is_anonim, d.created_at,
            k.judul AS judul_kampanye, k.id AS kampanye_id,
-           k.gambar AS gambar_kampanye, k.lokasi
+           k.gambar AS gambar_kampanye, k.lokasi,
+           u.nama AS nama_donatur
     FROM donasi d
     JOIN kampanye k ON d.kampanye_id = k.id
-    WHERE d.donatur_id = ?
+    JOIN users u ON d.donatur_id = u.id
+    WHERE k.penyelenggara_id = ?
     ORDER BY d.created_at DESC
 ";
 $stmt_rw = $conn->prepare($sql_riwayat);
@@ -47,7 +51,7 @@ $riwayat = $stmt_rw->get_result();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riwayat Donasi Saya - Bantu.in</title>
+    <title>Riwayat Donasi Masuk - Bantu.in</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="halaman-home">
@@ -63,6 +67,7 @@ $riwayat = $stmt_rw->get_result();
                 <a href="index.php#daftar-kampanye" class="home-nav-link">Kampanye</a>
                 <a href="dashboard.php" class="home-nav-link">Dashboard Saya</a>
                 <a href="riwayatPenyelenggara.php" class="home-nav-link aktif">Riwayat Donasi</a>
+                <a href="index.php#tentang" class="home-nav-link">Tentang Kami</a>
                 <span class="home-sapaan">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
                 <a href="logout.php" class="home-btn-login home-btn-logout">Logout</a>
             </nav>
@@ -70,8 +75,8 @@ $riwayat = $stmt_rw->get_result();
     </header>
 
     <main class="riwayat-container">
-        <h2 class="riwayat-judul">Riwayat Donasi Saya</h2>
-        <p class="riwayat-sub">Donasi yang pernah kamu berikan sebagai donatur tercatat di sini.</p>
+        <h2 class="riwayat-judul">Riwayat Donasi Masuk</h2>
+        <p class="riwayat-sub">Semua donasi yang masuk ke kampanye-kampanye milikmu tercatat di sini.</p>
 
         <div class="info-panel">
             <div class="info-box border-hijau">
@@ -97,10 +102,10 @@ $riwayat = $stmt_rw->get_result();
                     <tr>
                         <th>Tanggal</th>
                         <th>Kampanye</th>
+                        <th>Donatur</th>
                         <th>Nominal</th>
                         <th>Metode</th>
                         <th>Bukti Transfer</th>
-                        <th>Pesan</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -117,6 +122,12 @@ $riwayat = $stmt_rw->get_result();
                                     </a>
                                     <br><small style="color: var(--primary-400);">📍 <?= htmlspecialchars($row['lokasi']) ?></small>
                                 </td>
+                                <td>
+                                    <?= $row['is_anonim'] ? '<i style="color:var(--primary-400);">Anonim</i>' : htmlspecialchars($row['nama_donatur']) ?>
+                                    <?php if (!empty($row['pesan'])): ?>
+                                        <br><small class="riwayat-pesan"><?= htmlspecialchars($row['pesan']) ?></small>
+                                    <?php endif; ?>
+                                </td>
                                 <td><strong>Rp <?= number_format($row['nominal'], 0, ',', '.') ?></strong></td>
                                 <td><?= htmlspecialchars($row['metode_pembayaran']) ?></td>
                                 <td>
@@ -124,16 +135,6 @@ $riwayat = $stmt_rw->get_result();
                                         <img src="<?= htmlspecialchars($row['bukti_transfer']) ?>" 
                                              alt="Bukti Transfer" class="bukti-img">
                                     </a>
-                                </td>
-                                <td>
-                                    <?php if (!empty($row['pesan'])): ?>
-                                        <span class="riwayat-pesan"><?= htmlspecialchars($row['pesan']) ?></span>
-                                    <?php else: ?>
-                                        <span style="color: var(--primary-400);">-</span>
-                                    <?php endif; ?>
-                                    <?php if ($row['is_anonim']): ?>
-                                        <br><small style="color: var(--primary-400);">(anonim)</small>
-                                    <?php endif; ?>
                                 </td>
                                 <td>
                                     <?php if ($row['status'] === 'VERIFIED'): ?>
@@ -150,11 +151,8 @@ $riwayat = $stmt_rw->get_result();
                         <tr>
                             <td colspan="7" class="riwayat-kosong">
                                 <div>
-                                    <p style="font-size: 40px; margin-bottom: 12px;">💝</p>
-                                    <p>Kamu belum pernah berdonasi ke kampanye manapun.</p>
-                                    <a href="index.php#daftar-kampanye" class="home-btn-utama" style="display:inline-block; margin-top: 12px;">
-                                        Mulai Berdonasi
-                                    </a>
+                                    <p style="font-size: 40px; margin-bottom: 12px;">📭</p>
+                                    <p>Belum ada donasi yang masuk ke kampanyemu.</p>
                                 </div>
                             </td>
                         </tr>

@@ -62,6 +62,7 @@ $riwayat = $stmt_rw->get_result();
                 <a href="index.php" class="home-nav-link">Beranda</a>
                 <a href="index.php#daftar-kampanye" class="home-nav-link">Kampanye</a>
                 <a href="riwayatDonatur.php" class="home-nav-link aktif">Riwayat Donasi</a>
+                <a href="index.php#tentang" class="home-nav-link">Tentang Kami</a>
                 <span class="home-sapaan">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
                 <a href="logout.php" class="home-btn-login home-btn-logout">Logout</a>
             </nav>

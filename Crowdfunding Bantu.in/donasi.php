@@ -140,9 +140,22 @@ if ($persentase > 100) $persentase = 100;
                 <span class="home-logo-text">Bantu.in</span>
             </a>
             <nav class="home-navbar">
-                <a href="index.php" class="home-nav-link">Beranda</a>
-                <span style="color:white; font-size:14px; margin-right:10px;">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
-                <a href="logout.php" class="home-btn-login" style="background-color: #ff4d4d; color: white;">Logout</a>
+                <a href="index.php" class="home-nav-link aktif">Beranda</a>
+                <a href="#daftar-kampanye" class="home-nav-link">Kampanye</a>
+                <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'penyelenggara'): ?>
+                    <a href="dashboard.php" class="home-nav-link">Dashboard Saya</a>
+                    <a href="riwayatPenyelenggara.php" class="home-nav-link">Riwayat Donasi</a>
+                <?php elseif(isset($_SESSION['role']) && $_SESSION['role'] === 'donatur'): ?>
+                    <a href="riwayatDonatur.php" class="home-nav-link">Riwayat Donasi</a>
+                <?php endif; ?>
+                <a href="#" class="home-nav-link">Tentang Kami</a>
+                
+                <?php if(isset($_SESSION['user_id'])): ?>
+                    <span class="home-sapaan">Halo, <?= htmlspecialchars($_SESSION['nama']) ?>!</span>
+                    <a href="logout.php" class="home-btn-login home-btn-logout">Logout</a>
+                <?php else: ?>
+                    <a href="login.php" class="home-btn-login">Login</a>
+                <?php endif; ?>
             </nav>
         </div>
     </header>
