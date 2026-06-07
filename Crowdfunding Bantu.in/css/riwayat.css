@@ -1,0 +1,57 @@
+.riwayat-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 24px;
+}
+
+.riwayat-judul {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--primary-900);
+    margin-bottom: 6px;
+}
+
+.riwayat-sub {
+    color: var(--primary-500);
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+.riwayat-link-kampanye {
+    color: var(--dark-blue);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition);
+}
+
+.riwayat-link-kampanye:hover {
+    color: var(--primary-500);
+    text-decoration: underline;
+}
+
+.riwayat-pesan {
+    font-size: 13px;
+    color: var(--primary-700);
+    font-style: italic;
+}
+
+.riwayat-kosong {
+    text-align: center;
+    padding: 48px 24px !important;
+    color: var(--primary-500);
+    font-size: 15px;
+}
+
+.text-hijau { color: var(--emerald-600); }
+.text-kuning { color: var(--amber-600); }
+.text-merah { color: var(--rose-600); }
+
+@media (max-width: 768px) {
+    .riwayat-container {
+        padding: 20px 16px;
+    }
+}
